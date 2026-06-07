@@ -1,0 +1,35 @@
+name: Validate skills
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref
+        run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
+
+      - name: Validate every skill
+        run: |
+          set -e
+          found=0
+          for skill in */; do
+            if [ -f "${skill}SKILL.md" ]; then
+              found=1
+              echo "::group::Validating ${skill%/}"
+              skills-ref validate "./${skill%/}"
+              echo "::endgroup::"
+            fi
+          done
+          if [ "$found" -eq 0 ]; then
+            echo "No skills (directories containing SKILL.md) found."
+            exit 1
+          fi
