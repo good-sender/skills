@@ -1,7 +1,7 @@
 ---
 name: goodsender-api-integration
 description: Use when integrating the GoodSender email API into an app or service — obtaining and configuring an API key, verifying a sender domain, requesting recipient consent, and sending general or transactional email over HTTP. Covers the consent model, auth, error/quota handling, and the correct send flow.
-license: MIT
+license: Apache-2.0
 ---
 
 # Integrating the GoodSender Email API
