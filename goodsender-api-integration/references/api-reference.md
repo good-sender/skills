@@ -12,8 +12,8 @@ Full endpoint and field reference for the GoodSender HTTP API. Read [SKILL.md](.
 | Method & path | Purpose |
 |---------------|---------|
 | `POST /v1/emails/consent` | Request recipients' consent for a sender domain |
-| `POST /v1/emails/send` | Send one or more general emails (delivered only to consented recipients) |
-| `POST /v1/emails/template` | Send a transactional templated email (no prior consent required) |
+| `POST /v1/emails/send` | Send one or more custom emails (delivered only to consented recipients) |
+| `POST /v1/emails/template` | Send a transactional templated email (bypasses the Permission Loop) |
 | `GET /v1/emails/{email}` | Get a recipient's consent status |
 | `GET /v1/emails` | List recipient consent statuses (paginated, filterable) |
 | `GET /v1/domains` | List sender domains and their DNS verification state |
@@ -42,7 +42,7 @@ Re-requesting consent for a recipient who is `granted` but `inactive` resets the
 
 ## POST /v1/emails/send
 
-Sends general/bulk email. **Only recipients with `granted` consent and active engagement receive the email**; others are counted as `declined`, not delivered. Inactive recipients (120+ days no opens/clicks) are declined even when `granted`.
+Sends custom email. **Only recipients with `granted` consent (via the Permission Loop) and active engagement receive the email**; others are counted as `declined`, not delivered. Inactive recipients (120+ days no opens/clicks — the Engagement Check) are declined even when `granted`.
 
 Request body: `{ "emails": [ SendEmail, ... ] }` (non-empty).
 
@@ -74,7 +74,9 @@ Response `200`: `{ "sent": int, "declined": int }`.
 
 ## POST /v1/emails/template
 
-Sends a single transactional email from a predefined template. Unknown recipients are auto-registered as `pending`; **this endpoint does not change consent**. If the recipient is `denied`, response is `{ "status": "declined" }` and nothing is sent. Each email carries an approve/reject footer. URL-type variables must point to the sender's domain.
+Sends a single transactional email from a predefined template. **This path bypasses the Permission Loop entirely**: no consent and no prior registration are required, it sends instantly to any address (including one GoodSender has never seen, so no `404` for unknown recipients), and a Permission Loop reject (`denied`) does **not** block it — a reject only stops custom (`/v1/emails/send`) email. Transactional sends never change a recipient's consent state. Each email carries an approve/reject footer; bodies are link-free (anti-phishing). URL-type variables must point to the sender's domain.
+
+> **Source note:** This `denied`-recipients-still-receive behavior follows `goodsender-canon` (`product/transactional-templates.md`), which is authoritative. The `goodsender-mcp-go` OpenAPI spec currently describes the opposite (`denied` → not sent) and should be reconciled. The `status` field can still be `declined` for an address under workspace-wide suppression (after an unsubscribe or spam complaint), not for a Permission Loop reject.
 
 Request body:
 
@@ -85,14 +87,17 @@ Request body:
 | `subject` | string | yes | |
 | `template` | object | yes | `{ "template_id": string, "variables"?: object<string,string> }` |
 
-Built-in transactional template IDs and their variables (all variable values are strings):
+Built-in transactional template IDs and their variables (all variable values are strings; the catalogue grows over time):
 
-| `template_id` | Variables |
-|---------------|-----------|
-| `otp_code` | `app_name`, `otp_code`, `expiry_minutes` |
-| `mfa_enrollment` | `app_name`, `mfa_method`, `enrolled_at` |
-| `new_device_login` | `app_name`, `login_time`, `additional_info` |
-| `order_completed` | `app_name`, `order_id`, `order_total`, `completed_at` |
+| `template_id` | Purpose | Variables |
+|---------------|---------|-----------|
+| `otp_code` | One-time passcode for 2FA / passwordless login | `app_name`, `otp_code`, `expiry_minutes` |
+| `mfa_enrollment` | Confirm a user enabling multi-factor auth | `app_name`, `mfa_method`, `enrolled_at` |
+| `new_device_login` | Alert on access from a new device | `app_name`, `login_time`, `additional_info` |
+| `order_completed` | Confirm a completed checkout | `app_name`, `order_id`, `order_total`, `completed_at` |
+| `order_receipt` | Purchase receipt with line items and payment details | `app_name`, `description`, `receipt_number`, `purchase_date`, `payment_method`, `total` |
+| `email_changed` | Alert that the account email address changed (with compromise warning; sent to the last known address) | `app_name`, `new_email`, `changed_at`, `additional_info` |
+| `password_changed` | Confirm a password change (with compromise warning) | `app_name`, `changed_at`, `additional_info` |
 
 Omitted variables render as empty strings. Response `200`: `{ "status": "sent" | "declined" }`.
 
