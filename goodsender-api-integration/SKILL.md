@@ -49,7 +49,7 @@ Gate your send logic on `verification.verified === true`. Until then, mail will 
 | Custom email — newsletters, announcements, product updates, notifications to opted-in users | `POST /v1/emails/send` | Yes — recipient must have `granted` via the Permission Loop |
 | Transactional — OTP/2FA codes, order receipts, security alerts (password/email changed), new-device alerts | `POST /v1/emails/template` | No — the Permission Loop is bypassed entirely (no consent, no prior registration) |
 
-Don't push custom content through the transactional endpoint to skip the Permission Loop — that path only accepts the [fixed built-in templates](references/api-reference.md#post-v1emailstemplate) (link-free, with an approve/reject footer GoodSender adds), so it can't carry arbitrary content.
+Don't push custom content through the transactional endpoint to skip the Permission Loop — that path only accepts the [fixed built-in templates](references/api-reference.md#post-v1emailstemplate) (link-free), so it can't carry arbitrary content.
 
 ## Step 4 — The Permission Loop (custom email)
 
@@ -123,7 +123,7 @@ const { status } = await gs("/v1/emails/template", {
     template: { template_id: "otp_code",
       variables: { app_name: "Your App", otp_code: "482916", expiry_minutes: "10" } },
   }),
-}); // status: "sent" | "declined" (declined = workspace-suppressed address, not a consent reject)
+}); // status is always "sent" — transactional is not gated on consent
 ```
 
 Quick `curl` equivalents for testing each endpoint are in [api-reference.md](references/api-reference.md).
@@ -133,7 +133,7 @@ Quick `curl` equivalents for testing each endpoint are in [api-reference.md](ref
 - **Quotas (429).** There are daily and monthly send quotas. On `429`, read the `Retry-After` header and the body (`kind`, `limit`, `used`, `resetAt`) and back off until reset — never tight-loop retries.
 - **Retries.** `500`/`502` are safe to retry with backoff (consent creation is idempotent). `400`/`401`/`404` are not retryable — fix the request.
 - **The Engagement Check (inactivity).** GoodSender tracks each recipient's engagement over time (stages `new → hot → warm → cooling → dormant → inactive`). After 120 days with no opens/clicks a `granted` recipient becomes `inactive` and is blocked from `/v1/emails/send` (counted under `declined`). To re-engage, call `/v1/emails/consent` again — it resets them to `pending` and sends a fresh consent email.
-- **Workspace-wide suppression.** An unsubscribe or spam complaint suppresses that address **instantly across the whole workspace** — the API then refuses further sends to it from any API key. This is what a transactional `declined` reflects (not a Permission Loop reject, which does not block transactional).
+- **Workspace-wide suppression.** An unsubscribe or spam complaint suppresses that address **instantly across the whole workspace** — custom (`/v1/emails/send`) email to it is declined from then on, from any API key.
 - **Transactional templates are link-free.** Their bodies contain no clickable links (an anti-phishing measure). Deliver codes/values in the body (e.g. an OTP the user types back in) and implement any click-through flow in your own app, not via a link in the email.
 - **Batching.** Up to 1000 recipients per email and multiple emails per `send` request. Large attachments/recipient counts can return `413`.
 - **No unsubscribe footers needed.** GoodSender appends required compliance footers automatically; don't add your own.

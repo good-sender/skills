@@ -74,9 +74,9 @@ Response `200`: `{ "sent": int, "declined": int }`.
 
 ## POST /v1/emails/template
 
-Sends a single transactional email from a predefined template. **This path bypasses the Permission Loop entirely**: no consent and no prior registration are required, it sends instantly to any address (including one GoodSender has never seen, so no `404` for unknown recipients), and a Permission Loop reject (`denied`) does **not** block it — a reject only stops custom (`/v1/emails/send`) email. Transactional sends never change a recipient's consent state. Each email carries an approve/reject footer; bodies are link-free (anti-phishing). URL-type variables must point to the sender's domain.
+Sends a single transactional email from a predefined template. **This path bypasses the Permission Loop entirely**: no consent and no prior registration are required, it sends instantly to any address (including one GoodSender has never seen, so no `404` for unknown recipients), and a Permission Loop reject (`denied`) does **not** block it — a reject only stops custom (`/v1/emails/send`) email. Transactional sends never change a recipient's consent state. Bodies are link-free (anti-phishing). URL-type variables must point to the sender's domain.
 
-> **Source note:** This `denied`-recipients-still-receive behavior follows `goodsender-canon` (`product/transactional-templates.md`), which is authoritative. The `goodsender-mcp-go` OpenAPI spec currently describes the opposite (`denied` → not sent) and should be reconciled. The `status` field can still be `declined` for an address under workspace-wide suppression (after an unsubscribe or spam complaint), not for a Permission Loop reject.
+> **Source note:** Confirmed against the API server and its tests (`goodsender-web`): denied and unknown recipients still receive transactional templates, and the endpoint always returns `{"status":"sent"}` — it never returns `declined`. The `goodsender-mcp-go` OpenAPI copy is stale on this point (tracked in `inboxbit/goodsender-mcp-go#1`).
 
 Request body:
 
@@ -99,7 +99,7 @@ Built-in transactional template IDs and their variables (all variable values are
 | `email_changed` | Alert that the account email address changed (with compromise warning; sent to the last known address) | `app_name`, `new_email`, `changed_at`, `additional_info` |
 | `password_changed` | Confirm a password change (with compromise warning) | `app_name`, `changed_at`, `additional_info` |
 
-Omitted variables render as empty strings. Response `200`: `{ "status": "sent" | "declined" }`.
+Omitted variables render as empty strings. Response `200`: `{ "status": "sent" }` (the endpoint does not return `declined`).
 
 ---
 
