@@ -1,0 +1,4 @@
+interface:
+  display_name: "GoodSender Publishing"
+  short_description: "Create posts, visuals, and distribution for a clear goal"
+  default_prompt: "Use $goodsender-publish to prepare a post and its distribution around my publishing goal."
