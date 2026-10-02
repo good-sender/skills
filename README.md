@@ -8,8 +8,10 @@ Each skill is a ready-made ZIP. The links below always point at the latest versi
 
 | Skill | Use it when you want to… | Download |
 |-------|--------------------------|----------|
-| [`goodsender-publish`](goodsender-publish/) | Prepare a blog post, cover, useful inline visuals, social announcements, and newsletter copy around a publishing goal; review the draft or publish to authorized destinations through connected GoodSender MCP tools. | [**goodsender-publish-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-publish-latest.zip) |
+| [`goodsender-blog`](goodsender-blog/) | Go from an intention to a fact-checked, illustrated draft on your GoodSender blog, with social announcements and newsletter copy prepared; publish to the destinations you approve. | [**goodsender-blog-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-blog-latest.zip) |
 | [`goodsender-api-integration`](goodsender-api-integration/) | Integrate the GoodSender HTTP API into your own app or service — get an API key, verify a sending domain, request recipient consent, and send general or transactional email. | [**goodsender-api-integration-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-api-integration-latest.zip) |
+
+`goodsender-publish` was renamed to `goodsender-blog`. Remove the old skill when you install the new one; otherwise both respond to the same requests.
 
 ### Claude (desktop app or claude.ai)
 
@@ -40,10 +42,10 @@ Uploading is available in the Gemini web app and the Mac app; see [Create & mana
 Unpack the ZIP into the agent's skills folder. Keep the directory name identical to the skill's `name` field.
 
 ```bash
-curl -L -o goodsender-publish.zip https://github.com/good-sender/skills/releases/latest/download/goodsender-publish-latest.zip
+curl -L -o goodsender-blog.zip https://github.com/good-sender/skills/releases/latest/download/goodsender-blog-latest.zip
 
-mkdir -p ~/.claude/skills && unzip goodsender-publish.zip -d ~/.claude/skills/   # Claude Code
-mkdir -p ~/.agents/skills && unzip goodsender-publish.zip -d ~/.agents/skills/   # Codex, Gemini CLI, Copilot, Cursor
+mkdir -p ~/.claude/skills && unzip goodsender-blog.zip -d ~/.claude/skills/   # Claude Code
+mkdir -p ~/.agents/skills && unzip goodsender-blog.zip -d ~/.agents/skills/   # Codex, Gemini CLI, Copilot, Cursor
 ```
 
 | Agent | For all your projects | For one project |
@@ -57,20 +59,22 @@ mkdir -p ~/.agents/skills && unzip goodsender-publish.zip -d ~/.agents/skills/  
 Gemini CLI can also install straight from this repository, without downloading anything:
 
 ```bash
-gemini skills install https://github.com/good-sender/skills.git --path goodsender-publish
+gemini skills install https://github.com/good-sender/skills.git --path goodsender-blog
 ```
 
 Any other agent that supports the [Agent Skills specification](https://agentskills.io/specification) works the same way: unpack the ZIP into its skills directory.
 
-### Connecting GoodSender for `goodsender-publish`
+### Connecting GoodSender for `goodsender-blog`
 
-Installing a skill does not connect an account or select a workspace. Connect GoodSender in your agent separately, using your own workspace's authentication; the hosted MCP endpoint is `https://mcp.goodsender.com/`. Image generation is optional and depends on your agent's available tools.
+Installing a skill does not connect an account or select a workspace. Connect GoodSender in your agent separately, using your own workspace's authentication; the hosted MCP endpoint is `https://mcp.goodsender.com/`. The skill can start drafting before the connection exists and checks it when it saves the draft. Image generation is optional and depends on your agent's available tools.
 
 Example request:
 
-> Use goodsender-publish to prepare a post explaining our new feature to existing users. Use the attached release notes and screenshots, prepare LinkedIn and newsletter copy, and leave everything as a draft for review.
+> Use goodsender-blog to write a post telling existing users what changed in our 2.3 release. The repo is in this folder. Leave it as a draft and prepare LinkedIn and newsletter copy.
 
-The skill establishes the intended reader and outcome, uses the blog's existing byline and taxonomy, prepares assets and destination copy, and returns a preview. It also supports immediate publication when explicitly requested for the specified destinations. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. A simple sample draft or a narrow edit stays small.
+The skill starts from your goal and from who you are: who the post is for, what they should do or understand afterward, and what gives you standing to write it. It reads the blog for byline, voice, and taxonomy, and uses your notes and repository as evidence. Before saving, a separate fact-check pass asks you to confirm, source, or cut anything the agent could not back up, so its own guesses never reach your post. What you state or confirm is yours to decide. It generates and reviews images when your agent can, then returns a preview with a short claim ledger. Publishing happens only to the destinations you approve. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. A simple sample draft or a narrow edit stays small.
+
+In a coding agent, the skill keeps its notes (blog voice, facts, visual style, per-post sources) in a `goodsender-blog/` folder in the directory you run it from, with finished posts beside it. A separate folder per blog works best.
 
 ## Versions and releases
 

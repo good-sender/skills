@@ -1,0 +1,4 @@
+interface:
+  display_name: "GoodSender Blog"
+  short_description: "Write, fact-check, illustrate, and publish posts on GoodSender"
+  default_prompt: "Use $goodsender-blog to write a post toward my goal and leave it as a draft for review."
