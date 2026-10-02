@@ -89,15 +89,19 @@ Upload images with `upload_post_image` and use only the URLs it returns. Save wi
 
 ### 11. Distribution
 
-For a full publishing request, read `get_post_distribution` and follow [distribution.md](references/distribution.md): separate announcement copy per selected destination, the same article for republish destinations, a dedicated newsletter subject and summary. A connected account is an option, not consent. Save with `set_post_distribution` and re-read to verify.
+For a full publishing request, read `get_post_distribution` and follow [distribution.md](references/distribution.md): separate announcement copy per selected destination, the same article for republish destinations, a dedicated newsletter subject and summary. A connected account is an option, not consent. If preferences are missing, ask which destinations to use, make newsletter inclusion a separate and explicit choice, and ask whether they go out on publication or are only prepared for review.
+
+Save with `set_post_distribution`, which prepares delivery without sending. Preserve settings outside the requested change, and explicitly deselect destinations when that is needed to match a blog-only authorization. Re-read to verify selected accounts, saved copy, budgets, newsletter recipient count, and blockers. Surface a missing capability instead of substituting a fallback blurb.
 
 ### 12. Review and publish
 
-Hand over one review package: preview link, proposed title, the claim ledger (what was verified, hedged, cut), images or missing assets, announcement and newsletter copy, selected account names. Keep it short; do not paste the body back when the preview shows it. The blog preview is not a newsletter preview; for an email test, get the user's own inbox and use `send_post_test`.
+Hand over one review package: preview link, proposed title, the claim ledger (what was verified, hedged, cut), images or missing assets, announcement and newsletter copy, selected account names. Keep it short; do not paste the body back when the preview shows it. The blog preview is not a newsletter preview; for an email test, get the user's own inbox and use `send_post_test` with the exact subject and summary. Do not guess an address, and never send a test to the subscriber list.
 
 For draft-only work, stop here. To publish, the user approves the actual destinations. "Publish now, skip the review" is honored within the scope they authorized: it does not add channels or email subscribers, and it does not waive rule 1. If claims are still unresolved at that point, hedge or cut them with `edit_post`, say what you removed, then publish.
 
-Immediately before publishing, re-verify the workspace, the post, and `get_post_distribution`. `publish_post` publishes the page **and** distributes to every selected destination, including newsletter email. Afterward, check the results and report published, delivered, pending, blocked, and failed separately. Do not call `broadcast_post` after the newsletter was sent, or use `reannounce_post` as a retry. Never claim that a saved draft is published or that an email can be recalled.
+Immediately before publishing, re-verify the workspace, the post, and `get_post_distribution`. If what is selected differs from what the user authorized, fix the selection first. When asking for any missing authorization, summarize the concrete delivery plan. Follow every host or tool confirmation requirement that still applies. `publish_post` publishes the page **and** distributes to every selected destination, including newsletter email; never assume it changes only the web page.
+
+Afterward, check the post and the distribution results, and report published, delivered, pending, blocked, and failed separately. A successful page publish does not prove distribution succeeded. Use a bounded number of follow-up reads for pending deliveries, then report what is still pending. Do not call `broadcast_post` after the newsletter was sent, or use `reannounce_post` as a retry. Never claim that a saved draft is published or that an email can be recalled.
 
 ## Fast paths
 
