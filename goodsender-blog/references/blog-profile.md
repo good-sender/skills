@@ -19,6 +19,7 @@ Read; do not narrate. The user needs two lines at most ("Your blog reads as … 
 | Blog goal and audience | `blog.md`, else the blog description and posts, else ask once |
 | Language and spelling | The posts |
 | Byline and author URL | The most recent post |
+| Who the author is: role, specialization, experience, achievements | `blog.md`, what the posts say about the author, else ask once |
 | Tags and categories in use | `list_posts` |
 | Voice: person, sentence length, how posts open, humor, formatting habits (tables, code, bold) | The posts, `blog.md` |
 | Structure: heading style, how posts open and close, usual length | The posts, `blog.md` |
@@ -41,7 +42,7 @@ On a host with a filesystem, the skill keeps its own files in one dedicated fold
   2026-10-02-retry-queue.md          final post body, as saved to GoodSender
   2026-10-14-consent-flows.md
   goodsender-blog/                   the skill's own files
-    blog.md                          blog goal, audience, voice, structure, standing instructions
+    blog.md                          blog goal, author, audience, voice, structure, standing instructions
     facts.md                         what is true, and what may not be claimed
     visual.md                        image style, palette, what to avoid
     2026-10-02-retry-queue/          working files for one post
@@ -69,6 +70,7 @@ Rules:
 # <Blog name>
 
 ## Goal
+## Author
 ## Audience
 ## Voice
 ## Structure

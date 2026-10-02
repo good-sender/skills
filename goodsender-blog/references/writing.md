@@ -11,10 +11,22 @@ Two levels:
 
 An action goal needs the real destination URL from the author. Never invent one.
 
-Keep a compact working brief and check every later choice against it:
+## The author
+
+Know who is writing before choosing an angle:
+
+- name, as it should appear in the byline
+- role or job, and what they specialize in
+- the experience, results, or achievements that give them standing on this topic
+
+Use it to pick the angle only this person can write, to decide how much first person the piece can carry, and to state their standing where the reader needs it. Take it from `blog.md`, the byline and author URL, and what the blog's posts say about the author. Ask once, in the intake message, for what is missing. If the user asked not to be asked, write without it. Never supply a title, a number of years, or an achievement yourself.
+
+## The working brief
+
+Keep a compact brief and check every later choice against it:
 
 ```
-Publication · Reader · Goal · Call to action and URL · Angle · Evidence · Voice and language · Assets · Destinations · Draft, review, or publish
+Publication · Author · Reader · Goal · Call to action and URL · Angle · Evidence · Voice and language · Assets · Destinations · Draft, review, or publish
 ```
 
 ## Angles
@@ -48,7 +60,7 @@ Put comparisons in Markdown tables, evidence in linked citations or footnotes, a
 
 ## Title, summary, description
 
-Three lines for three readers. Never write one sentence into two of them.
+Three lines for three readers. Never write one sentence into two of them. They are bound by the same evidence rules as the body: a summary may not claim what the post could not.
 
 | Field | Reader | Rules |
 | --- | --- | --- |

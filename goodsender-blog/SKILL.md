@@ -8,14 +8,16 @@ metadata:
 
 # GoodSender blog
 
-Take the user from an intention to a post worth publishing: written toward their goal, in their blog's voice, with every factual claim backed, useful images, and distribution prepared. GoodSender is the destination; the article need not be about GoodSender. No local repository, pipeline, particular model, or paid image generator is required.
+Take the user from an intention to a post worth publishing: written toward their goal, in their blog's voice, with every factual claim backed, useful images, and distribution prepared. The post can be on any topic. GoodSender is the blog platform it is published to: it hosts the user's blog on their own domain. No local repository, pipeline, particular model, or paid image generator is required.
 
 ## Two rules that hold on every path
 
-1. **Your own knowledge is never a source.** A factual claim goes into the post only with the author, a repository, the blog, or a URL behind it. Otherwise ask about it, hedge it honestly, or cut it. This binds numbers, ranges, dates, quotes, named examples, product capabilities, first-person events, and "most / typically / studies show" generalizations alike.
+1. **Your own knowledge is never a source.** This rule protects the author from your hallucinations and wrong facts. A factual claim you introduce goes into the post only with the author, a repository, the blog, or a URL behind it. Otherwise ask about it, hedge it honestly, or cut it. This binds numbers, ranges, dates, quotes, named examples, product capabilities, first-person events, and "most / typically / studies show" generalizations alike.
 2. **Nothing is published, emailed, or announced without the user's approval of the actual destinations.**
 
-A draft is not a place to park invented content for the author to fix later. Saving a fabricated number or story and then saying "swap in the real details" breaks rule 1: the draft can be published from the dashboard in one click.
+**The author owns the post.** Rule 1 restrains you, not them. What the author states, confirms, or explicitly asks you to write goes in the way they want it, including a claim you cannot verify and content they knowingly ask you to make up. Do not argue, moralize, or ask twice. Your part is to keep them informed: say once when you could not verify something or when a source contradicts it, and list in the ledger what rests on their word or was invented at their request.
+
+A request for "solid numbers" or "a convincing example" asks for real ones; it is not a request to invent. And a draft is not a place to park content you invented for the author to fix later: saving a fabricated number or story and then saying "swap in the real details" breaks rule 1, because the draft can be published from the dashboard in one click.
 
 ## The flow
 
@@ -53,7 +55,9 @@ The goal is the landmark for everything after it: angle, evidence, structure, ca
 - **Blog goal:** what the publication is for. From the workspace folder or the blog itself; ask once if neither tells you.
 - **Post goal:** who the reader is and what they should do or understand afterward. An action goal needs the real destination URL.
 
-Reuse what the user already said. Then send **one** message containing only what you could not infer: the goal if unknown, two or three angles with a one-line trade-off each and your recommendation, the facts only the author knows (what happened, real numbers, dates), and whether they have images, want them generated, or want none.
+Then establish **who the author is**: name, role, specialization, and the experience or achievements that give them standing on this topic. A post written from a real person's position is stronger than an anonymous one. Take it from the workspace folder, the byline, and the blog's posts; ask once for what is missing. Never fill it in yourself.
+
+Reuse what the user already said. Then send **one** message containing only what you could not infer: the goal if unknown, who the author is if unknown, two or three angles with a one-line trade-off each and your recommendation, the facts only the author knows (what happened, real numbers, dates), and whether they have images, want them generated, or want none.
 
 If the user told you not to ask, do not ask. State the goal and angle you are assuming in one line and proceed with the evidence you have.
 
@@ -67,11 +71,11 @@ Follow [evidence.md](references/evidence.md). In short:
 - Outline with a claim checklist. Tag every major claim `author`, `repo`, `blog`, `web`, or `needs-source`.
 - Draft in the blog's voice toward the goal. A claim without a source gets an inline `[needs source]` marker or is left out. A source supports only what it states: one changelog line does not license scope, availability, or causes it does not mention.
 - Fact-check as a **separate pass**, in a fresh-context subagent where the host has one. It returns a ledger.
-- Apply the ledger. For what is still unsupported, ask the author **once**, in one numbered message: confirm, source, or cut. Say that anything unanswered will be hedged or cut. If the user said not to ask, or does not answer, hedge honestly or cut, and carry on. Never stall on an unanswered question.
+- Apply the ledger. For what is still unsupported, ask the author **once**, in one numbered message: confirm, source, or cut. Say that anything unanswered will be hedged or cut. What the author confirms goes in on their word. If the user said not to ask, or does not answer, hedge honestly or cut, and carry on. Never stall on an unanswered question.
 
 If the missing facts are the story itself (a first-person incident, a customer result, a measurement), there is nothing to draft yet: ask for them in the intake message.
 
-Gate: zero `[needs source]` markers, no claim resting on "studies show", "widely cited", "most", or "typically", and no first-person sentence the author or the blog did not supply.
+Gate: zero `[needs source]` markers. Nothing you introduced rests on "studies show", "widely cited", "most", or "typically", and no first-person sentence is there that the author or the blog did not supply.
 
 ### 8. Metadata and lint
 
@@ -119,6 +123,8 @@ Each of these was observed when agents wrote posts without this skill.
 | Write a full post before knowing what it is for | The goal steers every later choice. Ask once, or state your assumption. |
 | "Benchmarking studies show…", "widely cited", "typically 20–30%" with no URL | An unsupported claim wearing a disguise. Source it, hedge honestly, or cut it. |
 | A table of numbers because the user asked for "solid numbers" | The request does not create the evidence. Say which numbers would help and where they could come from. |
+| Inventing the author's job title, years of experience, or achievements | The author's standing is theirs to state. Ask once, or write without it. |
+| Re-arguing or refusing after the author confirmed a claim or asked for invented content | The author owns the post. Note it once, record it in the ledger, and write it. |
 | A vivid incident for a first-person post the author did not describe | Every first-person sentence is a claim about a real person. Ask. |
 | Saving it and adding "swap in what actually happened" | Disclosure after saving is not sourcing. |
 | "The step most customers skip", "teams usually…" in passing | A quantifier is a claim. Sweep for them in the fact-check. |
