@@ -1,0 +1,134 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref
+        run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
+
+      - name: Validate every skill
+        run: |
+          set -e
+          found=0
+          for skill in */; do
+            if [ -f "${skill}SKILL.md" ]; then
+              found=1
+              echo "::group::Validating ${skill%/}"
+              skills-ref validate "./${skill%/}"
+              echo "::endgroup::"
+            fi
+          done
+          if [ "$found" -eq 0 ]; then
+            echo "No skills (directories containing SKILL.md) found."
+            exit 1
+          fi
+
+      - name: Check skill versions
+        run: |
+          set -e
+          for skill in */; do
+            if [ -f "${skill}SKILL.md" ]; then
+              echo "${skill%/} $(.github/scripts/skill-version.sh < "${skill}SKILL.md")"
+            fi
+          done
+
+      - name: Changed skills must bump their version
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: origin/${{ github.base_ref }}
+        run: |
+          set -e
+          failed=0
+          for skill in */; do
+            skill="${skill%/}"
+            [ -f "${skill}/SKILL.md" ] || continue
+            git diff --quiet "${BASE}...HEAD" -- "${skill}" && continue
+            new=$(.github/scripts/skill-version.sh < "${skill}/SKILL.md")
+            old=$(git show "${BASE}:${skill}/SKILL.md" 2>/dev/null | .github/scripts/skill-version.sh 2>/dev/null || true)
+            if [ "$new" = "$old" ]; then
+              echo "::error file=${skill}/SKILL.md::${skill} changed but metadata.version is still ${old} — bump it."
+              failed=1
+            fi
+          done
+          exit "$failed"
+
+  release:
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: release
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Release only when a skill folder changed; a manual run always releases.
+      - name: Detect skill changes
+        id: changes
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] \
+            || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
+            || ! git diff --quiet "$BEFORE" "$GITHUB_SHA" -- ':(glob)goodsender*/**'; then
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No skill folder changed — skipping release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Package every skill
+        id: package
+        if: steps.changes.outputs.release == 'true'
+        run: |
+          set -euo pipefail
+          mkdir dist
+          notes=""
+          for dir in goodsender*/; do
+            skill="${dir%/}"
+            [ -f "${skill}/SKILL.md" ] || continue
+            version=$(.github/scripts/skill-version.sh < "${skill}/SKILL.md")
+            # The ZIP holds the skill folder itself, as Claude's upload expects.
+            zip -r -q "dist/${skill}-${version}.zip" "${skill}" -x '*.DS_Store'
+            cp "dist/${skill}-${version}.zip" "dist/${skill}-latest.zip"
+            notes+="- \`${skill}\` ${version}"$'\n'
+          done
+          ls -l dist
+          {
+            echo "notes<<NOTES_EOF"
+            printf '%s' "$notes"
+            echo "NOTES_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.changes.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES: ${{ steps.package.outputs.notes }}
+        run: |
+          set -euo pipefail
+          tag="$(date -u +%Y.%m.%d)-${GITHUB_SHA::7}"
+          gh release create "$tag" dist/*.zip \
+            --target "$GITHUB_SHA" \
+            --title "$tag" \
+            --notes "$NOTES" \
+            --latest
