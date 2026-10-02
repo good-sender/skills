@@ -2,35 +2,39 @@
 
 Agent Skills for working with [GoodSender](https://goodsender.com): publishing on your own domain, newsletter distribution, and consent-based email. Each skill conforms to the [Agent Skills specification](https://agentskills.io/specification) and works across agent platforms that support skills (Claude Code, Codex, Copilot CLI, Gemini CLI, and others).
 
-## Available skills
+## Install
 
-| Skill | Use it when you want to… |
-|-------|--------------------------|
-| [`goodsender-api-integration`](goodsender-api-integration/) | Integrate the GoodSender HTTP API into your own app or service — get an API key, verify a sending domain, request recipient consent, and send general or transactional email. |
-| [`goodsender-publish`](goodsender-publish/) | Prepare a blog post, cover, useful inline visuals, social announcements, and newsletter copy around a publishing goal; review the draft or publish to authorized destinations through connected GoodSender MCP tools. |
+Each skill is a ready-made ZIP. The links below always point at the latest version.
 
-## What is a skill?
+| Skill | Use it when you want to… | Download |
+|-------|--------------------------|----------|
+| [`goodsender-publish`](goodsender-publish/) | Prepare a blog post, cover, useful inline visuals, social announcements, and newsletter copy around a publishing goal; review the draft or publish to authorized destinations through connected GoodSender MCP tools. | [**goodsender-publish-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-publish-latest.zip) |
+| [`goodsender-api-integration`](goodsender-api-integration/) | Integrate the GoodSender HTTP API into your own app or service — get an API key, verify a sending domain, request recipient consent, and send general or transactional email. | [**goodsender-api-integration-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-api-integration-latest.zip) |
 
-A skill is a directory containing a `SKILL.md` file (YAML frontmatter + Markdown instructions) and optional supporting files under `references/`, `scripts/`, or `assets/`. Agents load the `name` and `description` at startup and pull in the full body only when the skill is relevant. See the [specification](https://agentskills.io/specification) for details.
+### Claude (desktop app or claude.ai)
 
-## Installing a skill
+1. Click the **Download** link for the skill you want.
+2. In Claude, open **Customize > Skills > Create skill > Upload a skill**.
+3. Upload the ZIP as downloaded — no need to unpack it.
 
-Copy the skill directory into your agent's skills folder. For example, with `goodsender-api-integration`:
+Skills must be enabled for your account; see [Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude). To update a skill later, download the link again and re-upload.
+
+### Claude Code and other agents
+
+Unpack the ZIP into your agent's skills folder:
 
 ```bash
-# Project-scoped (Claude Code)
-mkdir -p .claude/skills
-cp -R goodsender-api-integration .claude/skills/
+curl -L -o goodsender-publish.zip https://github.com/good-sender/skills/releases/latest/download/goodsender-publish-latest.zip
 
-# User-scoped (Claude Code)
-cp -R goodsender-api-integration ~/.claude/skills/
+unzip goodsender-publish.zip -d ~/.claude/skills/    # Claude Code, all projects
+unzip goodsender-publish.zip -d .claude/skills/      # Claude Code, this project only
 ```
 
-Other platforms use their own skills directory (e.g. `~/.agents/skills/` for Codex) — place the directory there instead. Keep the directory name identical to the skill's `name` field.
+Other platforms use their own skills directory (e.g. `~/.agents/skills/` for Codex) — unpack there instead. Keep the directory name identical to the skill's `name` field.
 
-### Publishing with GoodSender
+### Connecting GoodSender for `goodsender-publish`
 
-Install `goodsender-publish` the same way. Connect GoodSender in your agent first, using your own workspace's authentication. The hosted MCP endpoint is `https://mcp.goodsender.com/`; installing a skill does not connect an account or select a workspace. Image generation is optional and depends on your agent's available tools.
+Installing a skill does not connect an account or select a workspace. Connect GoodSender in your agent separately, using your own workspace's authentication; the hosted MCP endpoint is `https://mcp.goodsender.com/`. Image generation is optional and depends on your agent's available tools.
 
 Example request:
 
@@ -38,13 +42,16 @@ Example request:
 
 The skill establishes the intended reader and outcome, uses the blog's existing byline and taxonomy, prepares assets and destination copy, and returns a preview. It also supports immediate publication when explicitly requested for the specified destinations. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. A simple sample draft or a narrow edit stays small.
 
-For Claude's skill upload interface, package only the skill folder, with `goodsender-publish/SKILL.md` inside the ZIP:
+## Versions and releases
 
-```bash
-zip -r goodsender-publish.zip goodsender-publish
-```
+Each skill carries its own version in `SKILL.md` frontmatter (`metadata.version`, `MAJOR.MINOR.PATCH`). Whenever a skill folder changes on `main`, CI publishes a new [release](https://github.com/good-sender/skills/releases) with two ZIPs per skill:
 
-Upload that ZIP through **Customize > Skills > Create skill > Upload a skill**. See the [Claude skill installation instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude). The GoodSender connection is configured separately.
+- `<skill>-latest.zip` — what the links above download; always the newest version.
+- `<skill>-<version>.zip` — the same package under its version number, for pinning. Older versions stay available on their release pages.
+
+## What is a skill?
+
+A skill is a directory containing a `SKILL.md` file (YAML frontmatter + Markdown instructions) and optional supporting files under `references/`, `scripts/`, or `assets/`. Agents load the `name` and `description` at startup and pull in the full body only when the skill is relevant. See the [specification](https://agentskills.io/specification) for details.
 
 ## Repository layout
 
@@ -54,7 +61,7 @@ skills/
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── <skill-name>/
-    ├── SKILL.md          # required: frontmatter + instructions
+    ├── SKILL.md          # required: frontmatter (incl. metadata.version) + instructions
     └── references/       # optional: detailed reference docs
 ```
 

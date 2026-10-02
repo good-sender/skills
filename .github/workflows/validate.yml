@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -33,3 +35,32 @@ jobs:
             echo "No skills (directories containing SKILL.md) found."
             exit 1
           fi
+
+      - name: Check skill versions
+        run: |
+          set -e
+          for skill in */; do
+            if [ -f "${skill}SKILL.md" ]; then
+              echo "${skill%/} $(.github/scripts/skill-version.sh < "${skill}SKILL.md")"
+            fi
+          done
+
+      - name: Changed skills must bump their version
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: origin/${{ github.base_ref }}
+        run: |
+          set -e
+          failed=0
+          for skill in */; do
+            skill="${skill%/}"
+            [ -f "${skill}/SKILL.md" ] || continue
+            git diff --quiet "${BASE}...HEAD" -- "${skill}" && continue
+            new=$(.github/scripts/skill-version.sh < "${skill}/SKILL.md")
+            old=$(git show "${BASE}:${skill}/SKILL.md" 2>/dev/null | .github/scripts/skill-version.sh 2>/dev/null || true)
+            if [ "$new" = "$old" ]; then
+              echo "::error file=${skill}/SKILL.md::${skill} changed but metadata.version is still ${old} — bump it."
+              failed=1
+            fi
+          done
+          exit "$failed"
