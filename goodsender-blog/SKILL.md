@@ -71,7 +71,7 @@ Follow [evidence.md](references/evidence.md). In short:
 
 If the missing facts are the story itself (a first-person incident, a customer result, a measurement), there is nothing to draft yet: ask for them in the intake message.
 
-Gate: zero `[needs source]` markers, and no claim resting on "studies show", "widely cited", or "typically".
+Gate: zero `[needs source]` markers, no claim resting on "studies show", "widely cited", "most", or "typically", and no first-person sentence the author or the blog did not supply.
 
 ### 8. Metadata and lint
 
@@ -93,7 +93,7 @@ For a full publishing request, read `get_post_distribution` and follow [distribu
 
 ### 12. Review and publish
 
-Hand over one review package: preview link, proposed title, the claim ledger (what was verified, hedged, cut), images or missing assets, announcement and newsletter copy, selected account names. The blog preview is not a newsletter preview; for an email test, get the user's own inbox and use `send_post_test`.
+Hand over one review package: preview link, proposed title, the claim ledger (what was verified, hedged, cut), images or missing assets, announcement and newsletter copy, selected account names. Keep it short; do not paste the body back when the preview shows it. The blog preview is not a newsletter preview; for an email test, get the user's own inbox and use `send_post_test`.
 
 For draft-only work, stop here. To publish, the user approves the actual destinations. "Publish now, skip the review" is honored within the scope they authorized: it does not add channels or email subscribers, and it does not waive rule 1. If claims are still unresolved at that point, hedge or cut them with `edit_post`, say what you removed, then publish.
 
@@ -117,6 +117,8 @@ Each of these was observed when agents wrote posts without this skill.
 | A table of numbers because the user asked for "solid numbers" | The request does not create the evidence. Say which numbers would help and where they could come from. |
 | A vivid incident for a first-person post the author did not describe | Every first-person sentence is a claim about a real person. Ask. |
 | Saving it and adding "swap in what actually happened" | Disclosure after saving is not sourcing. |
+| "The step most customers skip", "teams usually…" in passing | A quantifier is a claim. Sweep for them in the fact-check. |
+| Hedging with "we have not measured this" | That is a fact about the author they never stated. Hedge the post, not the author. |
 | "Available on every plan", "any date range" from one changelog line | Inflating a source. State what it states. |
 | A roadmap item, draft doc, or unmerged branch described as shipped | Plans are not releases. |
 | A link to an earlier post built from its title | Guessed URL. Link only what you were given. |
@@ -127,4 +129,14 @@ Each of these was observed when agents wrote posts without this skill.
 
 ## Workspace folder
 
-On a host with a filesystem, keep the skill's files in a `goodsender-blog/` folder and finished posts beside it as `<date>-<slug>.md`. Layout and rules are in [blog-profile.md](references/blog-profile.md). Chat hosts stay stateless and re-derive the profile from the blog each time.
+On a host with a filesystem, keep the skill's files in a `goodsender-blog/` folder in the current directory and finished posts beside it. Create the folder the first time you have something to store, and say so in one line. Layout and rules are in [blog-profile.md](references/blog-profile.md).
+
+| When | Write |
+| --- | --- |
+| Stage 2 | `goodsender-blog/<date>-<slug>/brief.md` |
+| Stage 3 | `goodsender-blog/<date>-<slug>/sources.md` |
+| Stage 7 | `goodsender-blog/<date>-<slug>/ledger.md` |
+| Stage 9 | `goodsender-blog/<date>-<slug>/images/` |
+| Stage 10 | `<date>-<slug>.md`, the body exactly as saved |
+
+Chat hosts stay stateless and re-derive the profile from the blog each time.

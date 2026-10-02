@@ -67,6 +67,11 @@ Run it separately from drafting. Where the host has subagents, give a fresh one 
 
 Use web search only for external facts: statistics, other companies and products, third-party tools, regulations. Do not search to verify the author's own product or life.
 
+Two sweeps catch what a read-through misses:
+
+- **Quantifier sweep.** Find every "most", "many", "often", "usually", "typically", "rarely", "always", "never", "the majority", "on average". Each one is a claim about the world. Keep it only with a source; otherwise rewrite the sentence to describe the mechanism or the single case you have evidence for.
+- **First-person sweep.** Find every "I" and "we" sentence, including negatives ("we never", "we don't have"). Each one is a claim about the author and needs tier 1 or the blog's own posts behind it.
+
 The ledger, in this order:
 
 1. **Source contradictions** (only if any): the two statements, the URL, and which is more likely right.
@@ -91,17 +96,19 @@ Gate: zero `[needs source]` markers.
 
 ## Hedging honestly
 
-A hedge states the limit of what is known:
+A hedge states the limit of what the post claims, without claiming anything new:
 
-- "In our experience…" (only if the author said so)
-- "We have not measured this."
-- "This is our reasoning, not a benchmark."
+- "This post does not put a number on that."
+- "This is reasoning, not a benchmark."
+- "How much this saves depends on your invoice volume."
+
+A hedge must not become a statement about the author. "We have not measured this", "we don't track that", and "in our experience" are first-person facts: use them only if the author said so.
 
 These are not hedges. They are unsupported claims in disguise, and they are cut:
 
 - "Studies show…", "benchmarking studies agree…"
 - "It is widely cited that…", "industry data suggests…"
-- "Typically 20–30%…", "most teams…" with no source
+- "Typically 20–30%…", "most teams…", "the step most customers skip" with no source
 
 ## The ledger the user sees
 

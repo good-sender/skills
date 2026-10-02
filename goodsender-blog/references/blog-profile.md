@@ -7,8 +7,8 @@ Read at stage 1. The profile is what you know about the publication before writi
 | Call | What it settles |
 | --- | --- |
 | `get_blog` | Title, description, domain, theme: what the publication says it is |
-| `list_posts` | Byline and author URL, tags and categories in use, status, covers, topics already covered |
-| `get_post` on the two or three most recent published posts | Voice and structure, from the actual Markdown |
+| `list_posts` | Byline and author URL, tags and categories in use, status, topics already covered |
+| `get_post` on the two or three most recent published posts | Voice and structure from the actual Markdown; cover and inline images where the response includes them |
 
 Read; do not narrate. The user needs two lines at most ("Your blog reads as … I will reuse the byline and the Guides category").
 
@@ -22,7 +22,7 @@ Read; do not narrate. The user needs two lines at most ("Your blog reads as … 
 | Tags and categories in use | `list_posts` |
 | Voice: person, sentence length, how posts open, humor, formatting habits (tables, code, bold) | The posts, `blog.md` |
 | Structure: heading style, how posts open and close, usual length | The posts, `blog.md` |
-| Image habits: cover or none, style, inline images or none | Covers in `list_posts`, images in bodies, `visual.md` |
+| Image habits: cover or none, style, inline images or none | Cover URLs the tools return, images in bodies, `visual.md` |
 | Topics already covered | `list_posts` |
 | What is true and what may not be claimed | `facts.md` |
 
