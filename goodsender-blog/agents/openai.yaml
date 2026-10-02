@@ -1,4 +1,4 @@
 interface:
-  display_name: "GoodSender Publishing"
-  short_description: "Create posts, visuals, and distribution for a clear goal"
-  default_prompt: "Use $goodsender-publish to prepare a post and its distribution around my publishing goal."
+  display_name: "GoodSender Blog"
+  short_description: "Write, fact-check, illustrate, and publish posts on GoodSender"
+  default_prompt: "Use $goodsender-blog to write a post toward my goal and leave it as a draft for review."
