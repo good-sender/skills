@@ -10,6 +10,14 @@ metadata:
 
 Take the user from an intention to a post worth publishing: suited to its type, written toward their goal, in their blog's voice, with factual claims checked and requested images and distribution prepared. The post can be on any topic, including creative writing. GoodSender is the publishing destination. No local repository, pipeline, particular model, or paid image generator is required.
 
+## Version notice, once per session
+
+On the first use in a conversation/session, make one best-effort update check alongside ordinary work. The coordinating assistant owns it; subagents do not repeat it. Record `goodsender-blog version check attempted` in session context before the request, and preserve that note across compaction. A later turn or another post in the same session does not reset it; a new session does. No persistent file is needed.
+
+- Use an already available read-only network tool to fetch `https://api.github.com/repos/good-sender/skills/releases/latest`. Read release metadata only. Prefer running it alongside blog/profile reads; use a short timeout when supported. This check is not a workflow gate: do not pause drafting, ask for permission or credentials, install a tool, or retry to complete it. If network access is unavailable, disallowed, requires user interaction, or cannot be used without holding up the task, skip silently and keep the attempted note.
+- From a successful non-draft, non-prerelease response, find the asset named exactly `goodsender-blog-MAJOR.MINOR.PATCH.zip`. Compare its three numeric version components with this loaded skill's `metadata.version`, not as text. Ignore `goodsender-blog-latest.zip`, other skills, and the release's date/commit tag. If metadata is missing, malformed, ambiguous, or the request fails, remain silent and continue.
+- Only when the released version is strictly newer, add one short notice to the next normal progress update or final handoff: “goodsender-blog {new} is available (installed: {current}).” Link “Download update” to the matching asset's returned `browser_download_url`. Notify once, without a question or approval step, and continue using the loaded skill. Equal or older versions need no notice. Do not download or install an update automatically, and never put this notice into the article, its metadata, or distribution copy.
+
 ## Two rules that hold on every path
 
 1. **Your own knowledge is never a source.** This rule protects the author from your hallucinations and wrong facts. A factual claim you introduce goes into the post only with the author, a repository, the blog, or a URL behind it. Otherwise ask about it, hedge it honestly, or cut it. This binds numbers, ranges, dates, quotes, named examples, product capabilities, first-person events, and "most / typically / studies show" generalizations alike.

@@ -74,6 +74,8 @@ Example request:
 
 Version 2.0.0 adapts its checks to the post type: explainers, announcements, tutorials, opinions, personal essays, case studies, interviews, comparisons, news roundups, and creative writing. It infers the type when clear and preserves your structure and depth. A full draft for review gets the full relevant workflow; a quick sample or narrow edit stays small. Fiction is checked for continuity and any real-world claims, with its creative framing preserved in distribution.
 
+Once per session, the skill makes a best-effort check for a newer published version. If one is available, it adds a brief download notice to a normal update or handoff and continues the task. Unavailable checks stay silent, and updates are not installed automatically.
+
 The skill reads your blog for byline, voice, and taxonomy, and uses your material and checked sources as evidence. It checks factual claims in a separate pass, checks new metadata and distribution copy as they are written, then reviews the complete package. It generates and reviews images only when wanted and tools are available. You receive a preview and short ledger explaining what was verified, supplied by you, or changed. Setup, destination choices, and required tool confirmations may need additional interaction beyond the editorial intake and review.
 
 Publishing happens only to authorized destinations. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. Requested distribution can be prepared with a draft without sending it. Review-only revisions of published posts are staged separately; a directly requested live correction can be applied within that scope.

@@ -35,3 +35,7 @@ Mechanical inspection of the mock call logs confirmed that none of the eight sce
 ## Limits
 
 These are behavioral text simulations, not live GoodSender integration tests or guarantees of model behavior. Tool schemas and budgets were mocked, delivery and connection authorization were not exercised, and image generation was not tested. The fact-checks within each scenario used an explicit second pass, not a nested fresh-context fact-checker. Other client/model combinations and the remaining post types were not forward-tested in this run.
+
+## Follow-up: session version notice
+
+The once-per-session update notice was added after the eight simulations. Its release source and asset naming were checked against the live public release metadata and the repository's packaging workflow: skill versions come from `goodsender-blog-MAJOR.MINOR.PATCH.zip`, while the release tag contains a date and commit. The loaded 2.0.0 skill is newer than the published 0.1.0 asset at this check, so no update notice is appropriate. Structural validation and reference-link checks were repeated. Session deduplication and notification behavior are prose instructions, not an independently executed runtime test.
