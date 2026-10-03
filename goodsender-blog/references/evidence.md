@@ -1,6 +1,6 @@
 # Evidence, fact-check, and resolution
 
-Read at stages 3–7. These rules keep your hallucinations and wrong facts out of the author's post. They restrain you, not the author.
+Read at stages 3–7 and reuse for new claims at stages 8–12. These rules check factual assertions in every requested artifact. They restrain you, not the author.
 
 ## The author decides
 
@@ -10,6 +10,8 @@ It is the author's post. Whatever they state, confirm, or explicitly ask you to 
 - Say **once**, briefly, when you could not verify something or when a source contradicts it. Then follow their decision.
 - Record it in the ledger as "on the author's word" or "invented at the author's request", so they always know which parts of the post nobody checked.
 - A request for "solid numbers", "a strong example", or "make it convincing" asks for real material. It is not a request to invent. Only an explicit request to make something up is one.
+
+An explicit fiction or satire request authorizes invention within that creative premise. Record the scope once as requested creative material; do not ask the author to confirm every scene or source the narrator's biography. Keep that framing clear in the body, metadata, and distribution. Real-world claims outside the premise still need evidence.
 
 ## Trust order
 
@@ -21,7 +23,7 @@ It is the author's post. Whatever they state, confirm, or explicitly ask you to 
 | 4 | Web sources with a URL | External facts, depending on the source |
 | 5 | Your own knowledge | Nothing. It is never a source. |
 
-Tier 5 is where plausible posts go wrong. A number you remember, a range that sounds right, a familiar "best practice" figure: none of them may be stated as fact. You may explain reasoning and mechanisms in your own words; you may not present recalled specifics as findings.
+Tier 5 is where plausible posts go wrong. A number you remember, a range that sounds right, a familiar "best practice" figure: none of them may be stated as fact. You may explain sourced mechanisms in your own words and offer clearly identified reasoning; remembered behavior is not evidence. Source choice must also fit the claim's date and scope: an old blog post proves what was said then, not current availability or pricing.
 
 ## Git repositories
 
@@ -52,7 +54,9 @@ No web search in this session? Then external facts can come only from the author
 
 Statistics and ranges · dates and durations · prices · quotes · named customers, studies, and examples · what a product does or does not do · comparisons with other products · anything that happened to the author · "most", "typically", "on average".
 
-Opinions, arguments, and explanations of how something works are not claims. They must read as the author's reasoning, never dressed as findings.
+Preferences and explicitly framed interpretations do not require empirical proof, but their factual premises do. Explanations of mechanisms, causes, and product behavior are factual claims: "reminders are no longer sent" does not establish "paid invoices never enter the queue." A deduction should identify its basis and limits instead of silently adding implementation details.
+
+Fictional statements inside an authorized creative work are not assertions about the real author or world. Check them for continuity and the requested constraints, while checking nonfiction framing and real-world factual assertions against evidence.
 
 ## Claim checklist (outline stage)
 
@@ -66,20 +70,20 @@ A load-bearing claim tagged `needs-source` is a question for the author or a sea
 
 ## Drafting
 
-Write an unsupported claim with an inline `[needs source]` marker, or leave it out. On your own initiative, never invent first-person experience, the author's credentials, metrics, dates, quotes, or named examples. If the story itself is missing (the incident, the result, the measurement), there is nothing to draft: ask the author for it.
+Write an unsupported factual claim with an inline `[needs source]` marker, or leave it out. On your own initiative, never invent real first-person experience, credentials, metrics, dates, quotes, or named examples. If essential nonfiction material is missing, ask in intake; if it remains unavailable, deliver a clearly unfinished outline rather than inventing a finished story. Fiction follows the authorized creative premise.
 
 A request for "solid numbers" or "make it convincing" does not create evidence. Persuade with what is real: the author's own experience and data, the blog's earlier posts, reasoning the reader can check against their own situation. Then tell the author which numbers would strengthen the piece and where they could come from.
 
 ## Fact-check pass
 
-Run it separately from drafting. Where the host has subagents, give a fresh one only the draft, the collected evidence, and these rules. Otherwise do an explicit second pass that re-reads the draft claim by claim against the evidence, as if someone else wrote it.
+Run it separately from drafting. Where subagents are available and permitted, give a fresh one only the current text, evidence, relevant post-type constraints, and these rules. Otherwise explicitly re-read the text claim by claim against the evidence, as if someone else wrote it. Report only the validation actually performed.
 
 Use web search only for external facts: statistics, other companies and products, third-party tools, regulations. Do not search to verify the author's own product or life.
 
-Two sweeps catch what a read-through misses. Run them over everything that will be published, not only the body: title, summary, description, announcement copy, and newsletter text.
+Check the text that exists at each stage. The body pass cannot validate metadata or distribution written later. Check new metadata before saving the post, new distribution before saving its plan, and the complete package at stage 12. Include captions and alt text. Apply these sweeps to factual assertions, not mechanically to fictional dialogue or statements of taste:
 
-- **Quantifier sweep.** Find every "most", "many", "often", "usually", "typically", "rarely", "always", "never", "the majority", "on average". Each one is a claim about the world. Keep it only with a source; otherwise rewrite the sentence to describe the mechanism or the single case you have evidence for.
-- **First-person sweep.** Find every "I" and "we" sentence, including negatives ("we never", "we don't have"). Each one is a claim about the author and needs tier 1 or the blog's own posts behind it.
+- **Quantifier sweep.** Inspect "most", "many", "often", "usually", "typically", "rarely", "always", "never", "the majority", "on average". When asserting something about the real world, each needs a source; otherwise limit it to the case or mechanism actually supported.
+- **First-person sweep.** Inspect "I" and "we" sentences, including negatives. Real experiences and author attributes need tier 1 or the blog's own posts behind them. A stated preference or a fictional narrator does not imply a verified biographical event.
 
 The ledger, in this order:
 
@@ -90,6 +94,12 @@ The ledger, in this order:
 5. **Overstatements and drift**: stronger than the source, or pulling away from the goal.
 6. **Missing caveats**.
 7. **Exact revision instructions**.
+
+## Final package check
+
+After all requested artifacts exist, compare their current wording with the evidence and each other: body, title, summary, description, captions, alt text, announcements, and newsletter. Apply the relevant checks from `post-types.md`. A shorter summary or social hook must not strengthen a supported claim or present fiction as a real event.
+
+Update the ledger to reflect the actual final wording and checks performed. Correct any drift before delivery or publication, verify the saved result, and regenerate the post preview if the saved post changed. After a subsequent title choice, review edit, or copy shortening, recheck changed claims and dependent statements; an earlier pass is not approval of new text. Preserve unrelated content on narrow edits and report inconsistencies outside scope.
 
 ## Contradictions
 
@@ -122,4 +132,4 @@ These are not hedges. When you introduced them, they are unsupported claims in d
 
 ## The ledger the user sees
 
-Short. Counts first (verified, on the author's word, invented at their request, hedged, cut), then what was hedged or cut and why, then any open contradiction. On a host with a filesystem the full ledger goes in the post's `ledger.md`.
+Short. Counts when useful (verified, on the author's word, hedged, cut), then what changed and why, requested creative material, and any open contradiction. Do not inflate counts by treating every fictional sentence as an unchecked fact. For tutorials and reviews, distinguish execution or hands-on tests from source review. On a host with a filesystem keep the full ledger in the post's `ledger.md` and refresh it as the package changes.
