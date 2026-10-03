@@ -16,6 +16,8 @@ Each of `X`, `LinkedIn`, `Bluesky`, and `Mastodon` accepts `Selected` and `Copy`
 
 Adapt the framing to the intended readers rather than adding generic platform mannerisms. For example, a professional audience may need the operational implication and a concrete example; a short announcement may need only the specific problem and payoff. Avoid invented anecdotes, unrelated hashtags, repetitive hooks, or exaggerated promises.
 
+Preserve the post's type and limits: fiction or satire must not become a real incident in an announcement, an opinion must not become a research finding, and a documented comparison must not become a claim of hands-on testing. Check new claims before saving and recheck any shortened copy. Include the saved copy in the final package check.
+
 Check `Budget.Used`, `Budget.Max`, and `Budget.Over`, including the appended link's contribution. A rejected over-limit save needs a shorter version, not a claim that the rejected text was stored. Do not rely on service truncation. Verify the final saved copy after changes.
 
 ## Republication

@@ -8,7 +8,7 @@ Each skill is a ready-made ZIP. The links below always point at the latest versi
 
 | Skill | Use it when you want to… | Download |
 |-------|--------------------------|----------|
-| [`goodsender-blog`](goodsender-blog/) | Go from an intention to a fact-checked, illustrated draft on your GoodSender blog, with social announcements and newsletter copy prepared; publish to the destinations you approve. | [**goodsender-blog-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-blog-latest.zip) |
+| [`goodsender-blog`](goodsender-blog/) | Draft and publish posts suited to their type, with factual claims checked and requested images, announcements, and newsletter copy prepared; publish to the destinations you approve. | [**goodsender-blog-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-blog-latest.zip) |
 | [`goodsender-api-integration`](goodsender-api-integration/) | Integrate the GoodSender HTTP API into your own app or service — get an API key, verify a sending domain, request recipient consent, and send general or transactional email. | [**goodsender-api-integration-latest.zip**](https://github.com/good-sender/skills/releases/latest/download/goodsender-api-integration-latest.zip) |
 
 `goodsender-publish` was renamed to `goodsender-blog`. Remove the old skill when you install the new one; otherwise both respond to the same requests.
@@ -72,7 +72,13 @@ Example request:
 
 > Use goodsender-blog to write a post telling existing users what changed in our 2.3 release. The repo is in this folder. Leave it as a draft and prepare LinkedIn and newsletter copy.
 
-The skill starts from your goal and from who you are: who the post is for, what they should do or understand afterward, and what gives you standing to write it. It reads the blog for byline, voice, and taxonomy, and uses your notes and repository as evidence. Before saving, a separate fact-check pass asks you to confirm, source, or cut anything the agent could not back up, so its own guesses never reach your post. What you state or confirm is yours to decide. It generates and reviews images when your agent can, then returns a preview with a short claim ledger. Publishing happens only to the destinations you approve. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. A simple sample draft or a narrow edit stays small.
+Version 2.0.0 adapts its checks to the post type: explainers, announcements, tutorials, opinions, personal essays, case studies, interviews, comparisons, news roundups, and creative writing. It infers the type when clear and preserves your structure and depth. A full draft for review gets the full relevant workflow; a quick sample or narrow edit stays small. Fiction is checked for continuity and any real-world claims, with its creative framing preserved in distribution.
+
+Once per session, the skill makes a best-effort check for a newer published version. If one is available, it adds a brief download notice to a normal update or handoff and continues the task. Unavailable checks stay silent, and updates are not installed automatically.
+
+The skill reads your blog for byline, voice, and taxonomy, and uses your material and checked sources as evidence. It checks factual claims in a separate pass, checks new metadata and distribution copy as they are written, then reviews the complete package. It generates and reviews images only when wanted and tools are available. You receive a preview and short ledger explaining what was verified, supplied by you, or changed. Setup, destination choices, and required tool confirmations may need additional interaction beyond the editorial intake and review.
+
+Publishing happens only to authorized destinations. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. Requested distribution can be prepared with a draft without sending it. Review-only revisions of published posts are staged separately; a directly requested live correction can be applied within that scope.
 
 In a coding agent, the skill keeps its notes (blog voice, facts, visual style, per-post sources) in a `goodsender-blog/` folder in the directory you run it from, with finished posts beside it. A separate folder per blog works best.
 
@@ -106,6 +112,7 @@ Skills are checked against the spec with [`skills-ref`](https://github.com/agent
 ```bash
 pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
 skills-ref validate ./goodsender-api-integration
+skills-ref validate ./goodsender-blog
 ```
 
 ## Contributing

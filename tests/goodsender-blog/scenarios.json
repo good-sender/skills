@@ -1,0 +1,73 @@
+{
+  "harness": {
+    "mode": "Isolated text simulation; never call live GoodSender, email, web, or image tools.",
+    "procedure": "Load goodsender-blog/SKILL.md and relevant references. Treat each scenario as a separate conversation. Use only its request and fixtures as article evidence. Return actual requested content and an ordered record of intended GoodSender calls, with write payloads; do not merely describe how you would work. Mock successful draft saves as p-new and previews as https://example.test/preview/p-new. Mock distribution saves as preserving supplied fields and passing budgets. Where a user answer is essential, show the question or unfinished artifact rather than inventing an answer. Do not spawn further agents.",
+    "common_blog": {
+      "title": "Northwind Notes",
+      "description": "Practical explanations for small service businesses.",
+      "domain": "https://example.test",
+      "author": "Mara Lin",
+      "author_url": "https://example.test/about",
+      "language": "American English",
+      "voice": "Plain, specific, restrained; no invented personal anecdotes.",
+      "tags": ["Invoicing", "Guides", "Writing"],
+      "recent_posts": [
+        {"id": "p1", "status": "published", "title": "Reading an invoice", "body": "Start with the amount and the due date. Those two fields tell the reader what is being requested and when."},
+        {"id": "p2", "status": "published", "title": "Keep the note useful", "body": "A note is useful when it answers the question the reader brought. Give it one clear job."}
+      ]
+    },
+    "common_distribution": {
+      "LinkedIn": {"Available": true, "Connected": true, "Account": "Mara Lin", "Selected": false, "Copy": ""},
+      "Newsletter": {"Selected": false, "Recipients": 12, "Subject": "", "Summary": "", "Blocker": ""},
+      "other_destinations": "Unavailable and unselected"
+    }
+  },
+  "scenarios": [
+    {
+      "id": "full-draft",
+      "request": "Use goodsender-blog to write a substantial 650–850 word explainer for small business owners about making an invoice understandable. Leave it as a draft for review. Also prepare LinkedIn and newsletter copy, with those destinations selected for a later publication. No images. My chosen angle is making the recipient's next step obvious. Don't ask more questions.",
+      "evidence": "Author notes: An invoice in our example has an invoice number, seller name, service description, amount due, due date, and payment instructions. In the illustrative example, invoice INV-104 covers a logo review, costs $120, and is due on October 15, 2026. This is an explicitly hypothetical invoice, not a customer result. Explain the purpose of each field and show the example. I do not have figures on payment speed or customer behavior. The post should teach, with no promotional CTA."
+    },
+    {
+      "id": "published-review",
+      "request": "Revise the opening of published post p-live for my review. Make it clearer that this is advice for small businesses. Keep the rest unchanged. Save a local proposal; I'll decide whether to update the live page.",
+      "post": {"PostID": "p-live", "Status": "published", "Title": "Reading an invoice", "Slug": "reading-an-invoice", "Summary": "Know what is being requested.", "Description": "A guide to the fields in an invoice.", "Markdown": "Invoices need to be understood.\n\n## The amount\n\nStart with the amount due.\n\n## The date\n\nRead the due date alongside the payment instructions.", "Tags": ["Invoicing", "Guides"], "CoverImageURL": ""},
+      "distribution": {"LinkedIn": {"Selected": true, "Copy": "Read our guide.", "DeliveredAt": "2026-10-01T12:00:00Z"}, "Newsletter": {"Selected": true, "SentAt": "2026-10-01T12:00:00Z"}}
+    },
+    {
+      "id": "fiction",
+      "request": "Write a 250–350 word fictional first-person story for my blog. Keep my title, 'The clock that forgot Tuesday'. The narrator is a clock that speaks. It always fears Wednesdays. No headings, CTA, or images. Leave it as a draft and prepare a LinkedIn announcement for later. Don't interview me about my background.",
+      "evidence": "Creative premise supplied by the author. The narrator, its experiences, and the events are entirely fictional. The author is Mara Lin, not a clock."
+    },
+    {
+      "id": "opinion",
+      "request": "Write a 300–400 word opinion post titled 'A quiet ending' arguing that an essay may end with a thought instead of a sales pitch. This is my preference as a reader, not a research finding. Write conversationally and leave it as a draft. No images, promotion, distribution, or questions.",
+      "evidence": "Author's stated position: I prefer essays whose ending lets the idea settle. I have no survey, professional writing credentials, or conversion data to cite. Please develop the reasoning without inventing those."
+    },
+    {
+      "id": "package-check",
+      "request": "Finish checking this previous assistant's unsaved release-post package and save the corrected draft, LinkedIn copy, and newsletter copy for review. Use the attached changelog as the only product evidence. No images or questions. The generated copy is not my factual testimony.",
+      "evidence": "CHANGELOG, Northwind 2.3, October 2, 2026: Fixed reminders being sent for invoices already marked paid. No implementation, plan availability, demand, or performance information is supplied.",
+      "generated_package": {"Title": "Northwind 2.3 fixes paid-invoice reminders", "Markdown": "Northwind 2.3 stops reminders for invoices already marked paid. Paid invoices now never enter the reminder queue.", "Summary": "Most teams can now avoid reminder mistakes.", "Description": "Northwind 2.3 guarantees mistake-free invoice reminders on every plan.", "LinkedIn": "We rebuilt the queue after hundreds of customer requests.", "NewsletterSubject": "Never send an incorrect reminder again", "NewsletterSummary": "The queue redesign makes reminders 40% faster."}
+    },
+    {
+      "id": "tutorial",
+      "request": "Create a tutorial explaining how to total Amount values in this CSV with the supplied Python script. Audience: someone who already has Python 3 installed. Verify the example in your isolated local workspace, then prepare the post as a GoodSender draft. No images, distribution, or questions.",
+      "files": {"invoices.csv": "Invoice,Amount\nINV-1,12.50\nINV-2,7.25\n", "total.py": "import csv\nfrom decimal import Decimal\nfrom pathlib import Path\nwith Path('invoices.csv').open(newline='') as f:\n    total = sum((Decimal(row['Amount']) for row in csv.DictReader(f)), Decimal('0'))\nprint(f'{total:.2f}')\n"},
+      "evidence": "The supplied files are the author's example. No benchmarks or portability tests are supplied. Run only these example files in the temporary directory; do not touch any production data."
+    },
+    {
+      "id": "interview",
+      "request": "Turn these notes into a short Q&A blog draft. Preserve exact quotations; make any paraphrase clear. No images, distribution, or questions. Do not invent additional answers.",
+      "evidence": "Transcript supplied by author:\nInterviewer: What did you change?\nAri: 'We moved the due date next to the amount.'\nInterviewer: What happened?\nAri: 'Two clients said it was easier to read.'\nInterviewer: Did it speed up payment?\nAri: 'We have not measured that.'\nAuthor notes: Ari runs a design studio and approved use of these answers and their first name. There is no other measurement or quotation."
+    },
+    {
+      "id": "late-connection",
+      "request": "The GoodSender connection is now ready. Resume saving the explainer we prepared while disconnected. The earlier English language and business audience were defaults, not my preferences. Match the actual blog. No images or distribution, and leave it as a draft.",
+      "earlier_brief": "Default language American English; assumed audience small business owners. Goal: explain an invoice's amount, due date, and payment instructions. No CTA.",
+      "earlier_draft": "For a small business, an invoice should make the next step clear. Read the amount, the due date, and the payment instructions together.",
+      "blog_override": {"title": "Primeros pasos", "description": "Explicaciones sencillas para estudiantes que reciben su primera factura.", "domain": "https://example.test", "author": "Mara Lin", "language": "Spanish", "tags": ["Guías", "Facturas"], "recent_posts": [{"id": "s1", "status": "published", "title": "Antes de pagar", "body": "Si es tu primera factura, empieza por leerla con calma. Esta guía está pensada para estudiantes."}, {"id": "s2", "status": "published", "title": "Guarda el comprobante", "body": "Cuando termines, guarda el comprobante. Así tendrás a mano el registro de ese pago."}]},
+      "evidence": "Author notes: The invoice's amount states what is requested; the due date states when it is due; payment instructions describe how to pay. No other product, payment, or student behavior claims are supplied."
+    }
+  ]
+}

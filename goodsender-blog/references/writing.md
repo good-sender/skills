@@ -7,35 +7,35 @@ Read at stage 2 and again at stages 5 and 8.
 Two levels:
 
 - **Blog goal:** what the publication is for and who reads it. It changes rarely. Take it from `blog.md` or infer it from the blog; ask once if neither tells you.
-- **Post goal:** who this post is for and what they should do or understand afterward: register, follow a link, learn something, understand a release.
+- **Post goal:** who this post is for and what they should do, understand, reflect on, or experience afterward. Learning, reflection, and enjoyment are valid goals without a conversion CTA.
 
 An action goal needs the real destination URL from the author. Never invent one.
 
 ## The author
 
-Know who is writing before choosing an angle:
+Reuse the established byline. Learn more about the author when it affects the perspective or claims:
 
 - name, as it should appear in the byline
 - role or job, and what they specialize in
 - the experience, results, or achievements that give them standing on this topic
 
-Use it to pick the angle only this person can write, to decide how much first person the piece can carry, and to state their standing where the reader needs it. Take it from `blog.md`, the byline and author URL, and what the blog's posts say about the author. Ask once, in the intake message, for what is missing. If the user asked not to be asked, write without it. Never supply a title, a number of years, or an achievement yourself.
+Use relevant experience to choose an angle and support nonfiction first person where the reader needs it. Take it from `blog.md`, the byline and author URL, and the author's own material. Ask in intake only when missing background matters to this post; an essay, story, or simple announcement does not need a credentials interview. If the user asked not to be asked, write without it. Never invent credentials. Distinguish a fictional narrator from the author.
 
 ## The working brief
 
 Keep a compact brief and check every later choice against it:
 
 ```
-Publication · Author · Reader · Goal · Call to action and URL · Angle · Evidence · Voice and language · Assets · Destinations · Draft, review, or publish
+Publication · Author · Reader · Goal · Post type · Scope and depth · Angle · Evidence · Voice and language · CTA and URL if needed · Assets · Requested destinations · Draft, review, or publish
 ```
 
 ## Angles
 
-Offer two or three distinct angles, your recommendation first, each with a one-line trade-off: who it wins and what it costs. Prefer the angle the author's real evidence can carry. An angle that needs numbers nobody has is a weak angle, whatever its appeal.
+When the angle is open, offer two or three distinct angles, your recommendation first, each with a one-line trade-off. Preserve an angle the user already chose. Prefer an angle the evidence or authorized creative premise can carry; do not make fictional events substitutes for missing nonfiction evidence.
 
 ## Outline
 
-Structure follows the material, not a template. For each section, note what it will establish and which evidence carries it. Plan the next step toward the goal where it follows naturally from the argument; do not bolt it on at the end.
+Structure follows the material and post type, not a template. For a substantive factual post, note what each section establishes and which evidence carries it. For creative work, plan only as much structure as useful to its form. A short post need not acquire headings to satisfy an outline stage. Place a next step only where it supports the user's goal.
 
 ## Draft
 
@@ -64,11 +64,11 @@ Three lines for three readers. Never write one sentence into two of them. They a
 
 | Field | Reader | Rules |
 | --- | --- | --- |
-| Title | Someone deciding whether to open it | A specific claim, not a topic label. Sentence case, no trailing period. Search results and social cards begin truncating around 60 characters. It must be a promise the article keeps. |
+| Title | Someone deciding whether to open it | A concrete reason to read, appropriate to the type: a useful promise, a position, or an evocative creative title. Preserve a supplied title and the author's style; use sentence case by default. Keep it concise for cards. Any factual promise must be supported. |
 | Summary | Someone who has arrived and just read the title | Continues the thought the title starts. One or two sentences, up to about 300 characters. Shown under the title, on index cards, and in feeds. |
 | Description | A stranger looking at a search result or social card | Stands alone. One sentence, active voice, about 120–160 characters. It has no fallback: left blank, the search snippet is empty. |
 
-Propose the title with one or two alternatives. Do not decide it silently.
+Preserve a supplied title. Otherwise propose a title with one or two alternatives in the review package; use the recommendation for the draft without adding a separate title-approval round. Check whichever title is finally chosen.
 
 The platform title is the page heading. Keep it out of the body, or the heading renders twice.
 
@@ -90,6 +90,8 @@ Link only to URLs the author gave you, a tool returned, or a source you actually
 - [ ] Every link goes to a real, known destination
 - [ ] The call-to-action URL is exactly the one the author gave
 - [ ] Summary and description are different sentences
+- [ ] Body, metadata, captions, and alt text make no unsupported factual claims
+- [ ] The relevant post-type checks pass; creative framing survives in metadata
 
 ## Search optimization
 

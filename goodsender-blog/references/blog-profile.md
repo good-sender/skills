@@ -19,7 +19,7 @@ Read; do not narrate. The user needs two lines at most ("Your blog reads as … 
 | Blog goal and audience | `blog.md`, else the blog description and posts, else ask once |
 | Language and spelling | The posts |
 | Byline and author URL | The most recent post |
-| Who the author is: role, specialization, experience, achievements | `blog.md`, what the posts say about the author, else ask once |
+| Relevant author background, when the post needs it | `blog.md`, what the author or posts say, else ask in intake only if material |
 | Tags and categories in use | `list_posts` |
 | Voice: person, sentence length, how posts open, humor, formatting habits (tables, code, bold) | The posts, `blog.md` |
 | Structure: heading style, how posts open and close, usual length | The posts, `blog.md` |
@@ -31,7 +31,7 @@ Describe what you observe, not what is typical of blogs. Keep two real opening l
 
 ## Empty or unconnected blog
 
-Ask once, in the intake message, for a site URL or a sample of the author's writing. If there is none, use neutral defaults and say they are defaults: plain and direct, concrete over general, American English.
+If voice is material and no preference is supplied, ask in intake for a site URL or writing sample. Otherwise use stated defaults: plain and direct, concrete over general, American English. Honor an explicit creative style or language. When connecting later, reconcile the body and brief as well as metadata against the newly available profile; user instructions still take precedence.
 
 ## Workspace folder
 
@@ -97,7 +97,7 @@ Rules:
 ## Avoid
 ```
 
-`brief.md` holds the post goal, reader, angle, call to action and URL, and publish intent. `sources.md` lists each piece of evidence with its URL or repository reference. `ledger.md` is the fact-check ledger with the resolution of each claim.
+`brief.md` holds the post goal, reader, type, scope/depth, angle, optional CTA and URL, and delivery intent. `sources.md` lists evidence with URLs or repository references. `ledger.md` holds the checks and final claim resolutions, refreshed after metadata and distribution edits. Pending revisions of live posts stay in `revision.md` in the post's working folder, with the original post ID and text needed to apply the changes later.
 
 ## Chat hosts without a filesystem
 

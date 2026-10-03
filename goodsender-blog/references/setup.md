@@ -32,4 +32,4 @@ By default, mutating tools (create, edit, publish, send) do not run at once. The
 
 ## While the user sets up
 
-Keep the finished work ready: the post body, title, summary, description, tags, image briefs or files, and the claim ledger. On a host with a filesystem they are already in the workspace folder; otherwise they stay in the conversation. When `get_blog` succeeds, read the byline and taxonomy with `list_posts`, adjust the metadata to match, and resume at the save step.
+Keep the work ready: post body, metadata, requested image briefs or files, and the claim ledger, in the working folder or conversation. Once `get_blog` succeeds, complete the stage 1 profile reads: `list_posts` and `get_post` on two or three recent published posts when available. Reconcile the brief, body, metadata, and assets with the language, voice, audience, taxonomy, and covered topics. Preserve explicit user choices over inferred habits. Recheck changed claims and resume saving only after reconciliation; changing the byline alone does not adapt the draft to the blog.
