@@ -3,20 +3,20 @@ name: goodsender-api-integration
 description: Use when integrating the GoodSender email API into an app or service — obtaining and configuring an API key, verifying a sender domain, requesting recipient consent, and sending custom or transactional email over HTTP. Covers the Permission Loop, the Engagement Check, auth, error/quota handling, and the correct send flow.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Integrating the GoodSender Email API
 
 ## Overview
 
-GoodSender is a free, consent-based email service. Your app sends email over a small HTTP API. The defining rule that shapes every integration — GoodSender calls it **the Permission Loop**:
+GoodSender is an AI-first blog platform for your blog, newsletter, and audience. Its email API powers consent-based custom email and transactional templates. This skill covers integrating that email API into an app or service; use goodsender-blog for the editorial publishing workflow. The defining rule that shapes every integration — GoodSender calls it **the Permission Loop**:
 
 > **Custom email** is delivered **only to recipients who have granted consent** for your sending domain. You request consent once per recipient; GoodSender sends them a signed (un-forgeable) approve/reject prompt; only after they approve will `/v1/emails/send` deliver to them. Recipients without granted consent are silently counted as `declined`, not delivered.
 
 The exception is **transactional templates** (OTP, order receipt, security alerts, etc.) via `/v1/emails/template`: a fixed catalogue of predefined messages that send instantly to any address, bypassing the Permission Loop entirely.
 
-GoodSender is not a marketing or cold-outreach platform — you can only reach people who explicitly opted in. Design your integration around these two paths. Full endpoint/field details live in [references/api-reference.md](references/api-reference.md); this file is the workflow.
+GoodSender supports newsletters and permission-based content marketing. Cold outreach and purchased lists are not supported. Custom email requires recipient consent; the built-in transactional templates use the separate path described above. Design your integration around these two paths. Full endpoint/field details live in [references/api-reference.md](references/api-reference.md); this file is the workflow.
 
 ## Step 1 — Get an API key
 
