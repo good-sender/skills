@@ -26,6 +26,7 @@ Read; do not narrate. The user needs two lines at most ("Your blog reads as … 
 | Image habits: cover or none, style, inline images or none | Cover URLs the tools return, images in bodies, `visual.md` |
 | Topics already covered | `list_posts` |
 | What is true and what may not be claimed | `facts.md` |
+| Active human refinements, scoped to publication/platform/account | `gs/feedback.md` in the invocation directory; read on every call |
 
 Describe what you observe, not what is typical of blogs. Keep two real opening lines as anchors for the voice. Do not promote a habit seen in one post into a rule.
 
@@ -41,6 +42,8 @@ On a host with a filesystem, the skill keeps its own files in one dedicated fold
 <blog-name>/
   2026-10-02-retry-queue.md          final post body, as saved to GoodSender
   2026-10-14-consent-flows.md
+  gs/
+    feedback.md                      author feedback; created/read on every invocation
   goodsender-blog/                   the skill's own files
     blog.md                          blog goal, author, audience, voice, structure, standing instructions
     facts.md                         what is true, and what may not be claimed
@@ -58,7 +61,7 @@ Rules:
 - Create `goodsender-blog/` the first time there is something to store, and tell the user in one line that you did.
 - If a `goodsender-blog/` directory already exists and does not hold these files, ask before using it.
 - `blog.md`, `facts.md`, and `visual.md` override what you infer from the live blog.
-- When the author corrects you ("we never say that", "the number is 41"), propose the update to the matching file and write it once they agree.
+- Automatically create/read `gs/feedback.md` in the invocation directory on every call, independently of whether per-post working files are needed. Follow [improve-yourself.md](improve-yourself.md) to capture author remarks without asking permission to remember. Store one-post corrections too, marked with their limited scope.
 - One blog per folder. Facts from one publication never inform another.
 - No secrets in any of these files.
 
@@ -101,4 +104,4 @@ Rules:
 
 ## Chat hosts without a filesystem
 
-Stay stateless. Re-derive the profile from the blog each run, and keep working material in the conversation.
+Re-derive the profile from the blog each run, and keep working material in the conversation. Follow improve-yourself.md for a portable preference block when durable storage is unavailable; do not claim it will be remembered in a new session.

@@ -1,14 +1,18 @@
 ---
 name: goodsender-blog
-description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, and edits to existing posts.
+description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and automatically retaining author feedback for future posts.
 license: Apache-2.0
 metadata:
-  version: "2.0.1"
+  version: "2.1.0"
 ---
 
 # GoodSender blog
 
 Take the user from an intention to a post worth publishing: suited to its type, written toward their goal, in their blog's voice, with factual claims checked and requested images and distribution prepared. The post can be on any topic, including creative writing. GoodSender is the AI-first blog platform for your blog, newsletter, and audience. MCP or CLI provides the connection; this skill provides the editorial workflow. Preserve the author's voice and publish only to the destinations they authorize. No local repository, pipeline, particular model, or paid image generator is required.
+
+## Automatic feedback memory — every invocation
+
+Before any work, including quick samples, narrow edits, and feedback-only requests, create `gs/feedback.md` in the directory where this skill was invoked if it is absent, or read it if it exists. Reuse the same file on later calls; never reset it. Read [improve-yourself.md](references/improve-yourself.md) and apply relevant saved feedback before composing. Automatically record the author’s corrections, refinements, suggestions, and improvement remarks as they arrive, and check for uncaptured feedback before finishing. No “improve yourself” command or separate permission to remember is required. Respect explicit requests not to store feedback.
 
 ## Version notice, once per session
 
@@ -57,6 +61,8 @@ With several connections, use the one matching the requested publication. Never 
 Not connected? Do not block. Note it, and continue with what the user gives you. The connection is needed only at stage 10.
 
 Gate: you can describe the blog in two lines, or you say you are using defaults.
+
+Use the applicable entries already loaded from `gs/feedback.md` when establishing the profile and brief.
 
 ### 2. Goal and intake
 
@@ -123,6 +129,10 @@ Immediately before publishing, re-verify the workspace, the post, and `get_post_
 
 Afterward, check the post and the distribution results, and report published, delivered, pending, blocked, and failed separately. A successful page publish does not prove distribution succeeded. Use a bounded number of follow-up reads for pending deliveries, then report what is still pending. Do not call `broadcast_post` after the newsletter was sent, or use `reannounce_post` as a retry. Never claim that a saved draft is published or that an email can be recalled.
 
+## Improve yourself
+
+This is the automatic feedback loop described above, not a command the author needs to invoke. Follow [improve-yourself.md](references/improve-yourself.md) on every call. A feedback-only request updates the feedback file without starting a post, contacting GoodSender, or running the publishing stages.
+
 ## Fast paths
 
 - **Quick sample:** no interview and no unsolicited distribution questions. Write a short post from the available material, check it and its metadata, save a draft, and return the preview. Honor any distribution preparation explicitly requested with the sample.
@@ -160,10 +170,12 @@ On a host with a filesystem, keep the skill's files in a `goodsender-blog/` fold
 
 | When | Write |
 | --- | --- |
+| Every invocation, before work | `gs/feedback.md`, relative to the invocation directory; create if missing, otherwise read and preserve |
+| Author feedback and final review | Update `gs/feedback.md` with scoped corrections, suggestions, and refinements |
 | Stage 2 | `goodsender-blog/<date>-<slug>/brief.md` |
 | Stage 3 | `goodsender-blog/<date>-<slug>/sources.md` |
 | Stage 7, refreshed at stages 8–12 | `goodsender-blog/<date>-<slug>/ledger.md` |
 | Stage 9 | `goodsender-blog/<date>-<slug>/images/` |
 | Stage 10 | `<date>-<slug>.md`, the body exactly as saved; a pending live revision stays in its working folder as `revision.md` |
 
-Chat hosts stay stateless and re-derive the profile from the blog each time.
+Hosts without durable storage retain feedback only in the conversation and provide a portable preference block; never promise cross-session memory without a verified saved artifact. See improve-yourself.md.

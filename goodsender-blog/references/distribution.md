@@ -14,6 +14,8 @@ Offer only available connected accounts for immediate distribution. Explain how 
 
 Each of `X`, `LinkedIn`, `Bluesky`, and `Mastodon` accepts `Selected` and `Copy`; clearing copy is a separate operation. `Copy` excludes the post link because the service appends it.
 
+Before drafting, load the publication’s applicable `gs/feedback.md` entries for the selected account/platform and read [announcement-x.md](announcement-x.md) for X or [announcement-linkedin.md](announcement-linkedin.md) for LinkedIn. These guides distinguish platform constraints from editorial defaults and community observations. Check current official rules when preparing copy; use the live GoodSender budget and the applicable platform limit, honoring the stricter constraint. If current verification is unavailable, use the documented conservative baseline and disclose that limits were not refreshed; do not claim a live check.
+
 Adapt the framing to the intended readers rather than adding generic platform mannerisms. For example, a professional audience may need the operational implication and a concrete example; a short announcement may need only the specific problem and payoff. Avoid invented anecdotes, unrelated hashtags, repetitive hooks, or exaggerated promises.
 
 Preserve the post's type and limits: fiction or satire must not become a real incident in an announcement, an opinion must not become a research finding, and a documented comparison must not become a claim of hands-on testing. Check new claims before saving and recheck any shortened copy. Include the saved copy in the final package check.
