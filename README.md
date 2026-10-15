@@ -1,6 +1,6 @@
 # GoodSender Skills
 
-Agent Skills for working with [GoodSender](https://goodsender.com): publishing on your own domain, newsletter distribution, and consent-based email. Each skill conforms to the [Agent Skills specification](https://agentskills.io/specification) and works across agent platforms that support skills (Claude Code, Codex, Copilot CLI, Gemini CLI, and others).
+Agent Skills for working with [GoodSender](https://goodsender.com): the AI-first blog platform for your blog, newsletter, and audience. MCP or CLI connects your assistant to GoodSender; skills add the workflow. Each skill conforms to the [Agent Skills specification](https://agentskills.io/specification) and works across agent platforms that support skills (Claude Code, Codex, Copilot CLI, Gemini CLI, and others).
 
 ## Install
 

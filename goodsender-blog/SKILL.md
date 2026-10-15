@@ -3,12 +3,12 @@ name: goodsender-blog
 description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, and edits to existing posts.
 license: Apache-2.0
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
 ---
 
 # GoodSender blog
 
-Take the user from an intention to a post worth publishing: suited to its type, written toward their goal, in their blog's voice, with factual claims checked and requested images and distribution prepared. The post can be on any topic, including creative writing. GoodSender is the publishing destination. No local repository, pipeline, particular model, or paid image generator is required.
+Take the user from an intention to a post worth publishing: suited to its type, written toward their goal, in their blog's voice, with factual claims checked and requested images and distribution prepared. The post can be on any topic, including creative writing. GoodSender is the AI-first blog platform for your blog, newsletter, and audience. MCP or CLI provides the connection; this skill provides the editorial workflow. Preserve the author's voice and publish only to the destinations they authorize. No local repository, pipeline, particular model, or paid image generator is required.
 
 ## Version notice, once per session
 
