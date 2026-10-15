@@ -1,9 +1,9 @@
 ---
 name: goodsender-blog
-description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, and edits to existing posts.
+description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and “improve yourself” requests to remember editorial feedback.
 license: Apache-2.0
 metadata:
-  version: "2.0.1"
+  version: "2.1.0"
 ---
 
 # GoodSender blog
@@ -57,6 +57,8 @@ With several connections, use the one matching the requested publication. Never 
 Not connected? Do not block. Note it, and continue with what the user gives you. The connection is needed only at stage 10.
 
 Gate: you can describe the blog in two lines, or you say you are using defaults.
+
+Read the active publication’s saved preferences in `improvements.md`, if present, before composing. Follow [improve-yourself.md](references/improve-yourself.md) for scope, conflicts, and feedback capture.
 
 ### 2. Goal and intake
 
@@ -123,6 +125,10 @@ Immediately before publishing, re-verify the workspace, the post, and `get_post_
 
 Afterward, check the post and the distribution results, and report published, delivered, pending, blocked, and failed separately. A successful page publish does not prove distribution succeeded. Use a bounded number of follow-up reads for pending deliveries, then report what is still pending. Do not call `broadcast_post` after the newsletter was sent, or use `reannounce_post` as a retry. Never claim that a saved draft is published or that an email can be recalled.
 
+## Improve yourself
+
+When the user says “improve yourself,” asks to remember a preference, or gives reusable editorial feedback, follow [improve-yourself.md](references/improve-yourself.md). Apply corrections to the current work and store authorized standing guidance in the publication workspace for future posts. An improvement-only request does not start a post, contact GoodSender, or run the publishing stages.
+
 ## Fast paths
 
 - **Quick sample:** no interview and no unsolicited distribution questions. Write a short post from the available material, check it and its metadata, save a draft, and return the preview. Honor any distribution preparation explicitly requested with the sample.
@@ -166,4 +172,4 @@ On a host with a filesystem, keep the skill's files in a `goodsender-blog/` fold
 | Stage 9 | `goodsender-blog/<date>-<slug>/images/` |
 | Stage 10 | `<date>-<slug>.md`, the body exactly as saved; a pending live revision stays in its working folder as `revision.md` |
 
-Chat hosts stay stateless and re-derive the profile from the blog each time.
+Hosts without durable storage retain feedback only in the conversation and provide a portable preference block; never promise cross-session memory without a verified saved artifact. See improve-yourself.md.
