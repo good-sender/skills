@@ -1,6 +1,6 @@
 ---
 name: goodsender-blog
-description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and “improve yourself” requests to remember editorial feedback.
+description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and automatically retaining author feedback for future posts.
 license: Apache-2.0
 metadata:
   version: "2.1.0"
@@ -9,6 +9,10 @@ metadata:
 # GoodSender blog
 
 Take the user from an intention to a post worth publishing: suited to its type, written toward their goal, in their blog's voice, with factual claims checked and requested images and distribution prepared. The post can be on any topic, including creative writing. GoodSender is the AI-first blog platform for your blog, newsletter, and audience. MCP or CLI provides the connection; this skill provides the editorial workflow. Preserve the author's voice and publish only to the destinations they authorize. No local repository, pipeline, particular model, or paid image generator is required.
+
+## Automatic feedback memory — every invocation
+
+Before any work, including quick samples, narrow edits, and feedback-only requests, create `gs/feedback.md` in the directory where this skill was invoked if it is absent, or read it if it exists. Reuse the same file on later calls; never reset it. Read [improve-yourself.md](references/improve-yourself.md) and apply relevant saved feedback before composing. Automatically record the author’s corrections, refinements, suggestions, and improvement remarks as they arrive, and check for uncaptured feedback before finishing. No “improve yourself” command or separate permission to remember is required. Respect explicit requests not to store feedback.
 
 ## Version notice, once per session
 
@@ -58,7 +62,7 @@ Not connected? Do not block. Note it, and continue with what the user gives you.
 
 Gate: you can describe the blog in two lines, or you say you are using defaults.
 
-Read the active publication’s saved preferences in `improvements.md`, if present, before composing. Follow [improve-yourself.md](references/improve-yourself.md) for scope, conflicts, and feedback capture.
+Use the applicable entries already loaded from `gs/feedback.md` when establishing the profile and brief.
 
 ### 2. Goal and intake
 
@@ -127,7 +131,7 @@ Afterward, check the post and the distribution results, and report published, de
 
 ## Improve yourself
 
-When the user says “improve yourself,” asks to remember a preference, or gives reusable editorial feedback, follow [improve-yourself.md](references/improve-yourself.md). Apply corrections to the current work and store authorized standing guidance in the publication workspace for future posts. An improvement-only request does not start a post, contact GoodSender, or run the publishing stages.
+This is the automatic feedback loop described above, not a command the author needs to invoke. Follow [improve-yourself.md](references/improve-yourself.md) on every call. A feedback-only request updates the feedback file without starting a post, contacting GoodSender, or running the publishing stages.
 
 ## Fast paths
 
@@ -166,6 +170,8 @@ On a host with a filesystem, keep the skill's files in a `goodsender-blog/` fold
 
 | When | Write |
 | --- | --- |
+| Every invocation, before work | `gs/feedback.md`, relative to the invocation directory; create if missing, otherwise read and preserve |
+| Author feedback and final review | Update `gs/feedback.md` with scoped corrections, suggestions, and refinements |
 | Stage 2 | `goodsender-blog/<date>-<slug>/brief.md` |
 | Stage 3 | `goodsender-blog/<date>-<slug>/sources.md` |
 | Stage 7, refreshed at stages 8–12 | `goodsender-blog/<date>-<slug>/ledger.md` |

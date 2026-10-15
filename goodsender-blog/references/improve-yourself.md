@@ -1,46 +1,63 @@
-# Improve yourself
+# Improve yourself — automatic feedback memory
 
-Use when the author asks to “improve yourself,” remember a correction, refine future writing, or offers reusable editorial feedback. This process improves the publication's working instructions; it does not retrain the model or silently rewrite the installed skill.
+Run this process on every goodsender-blog invocation, including quick samples, narrow edits, and feedback-only requests. The author never needs to say “improve yourself” or ask to remember. This is persistent working guidance, not model retraining or an automatic rewrite of the installed skill.
 
-## Capture the right scope
+## Initialize and read before work
 
-Apply feedback to the current draft within the requested edit scope. Then distinguish:
+Resolve `gs/feedback.md` relative to the directory where the skill was invoked, before changing working directories. Keep that resolved path for the whole task. Create `gs/` and the file if absent, even when there is no feedback yet. If the file exists, read and preserve it; never overwrite it with the skeleton or create a fresh file per post. Do not substitute the installed skill directory or another blog's folder.
 
-- **Standing instruction:** “Remember: no hashtags on X,” “From now on, open LinkedIn announcements with a useful takeaway,” or feedback supplied during an explicit “improve yourself” request. Save the reusable instruction directly; that request authorizes the local preference update. An already enabled standing request to remember editorial feedback also suffices.
-- **One-post correction:** “Remove this hashtag from this announcement.” Apply it here, retaining context in the post's brief if useful; do not infer a permanent ban.
-- **Ambiguous suggestion:** apply the requested current edit and propose a concise future rule. If persistent capture has not been authorized, ask once whether it should apply to future posts; keep drafting independently. Do not store a tentative suggestion as an active rule without that intent.
-
-An “improve yourself” request without specified feedback can use clear corrections already present in the conversation. If none exist, ask what should change; do not invent user preferences. Preserve distinctions such as “try this next time” versus “always do this.” Store an experiment with its intended review point, not as a proven performance rule.
-
-## Persist in the publication workspace
-
-Follow blog-profile.md's folder and collision rules. The workspace is the author's blog folder, not the installed skill or this skill's development repository. Never put private preferences into a distributable skill package. Use a known publication workspace; if none is identified and the current folder contains skill source, ask for the workspace and keep the proposed entry in the conversation meanwhile.
-
-Read existing files before writing and preserve unrelated content. Keep active stylistic/process preferences in `goodsender-blog/improvements.md`; facts belong in `facts.md`, and visual guidance in `visual.md`. Use one canonical location per rule and cross-reference rather than duplicating instructions across files. If a fact changes, preserve its source/date and scope; an author's correction is author-supplied evidence, not independent verification. Do not retain secrets or unnecessary private details.
-
-A compact entry should contain:
+Initial contents:
 
 ```markdown
-## IMP-001 — No hashtags on X
+# GoodSender author feedback
+
+Author corrections, refinements, suggestions, and improvement remarks captured automatically. Apply entries only within their recorded scope.
+
+## Feedback
+```
+
+Do not invent entries just to populate the file. Respect an explicit no-storage request. If the path is occupied by an incompatible file/directory or storage fails, preserve existing content, report the problem, and continue with conversation-local feedback; do not silently relocate the file. Keep feedback local and out of published copy, release bundles, or commits unless the author asks to include it.
+
+Load relevant entries before composing. Use publication, account, platform, post type, and post-specific scope to select them. When the folder serves multiple publications, identify the publication on each entry and keep them separate. Do not apply an entry with unclear publication identity across blogs.
+
+## Capture feedback automatically
+
+As the author corrects, refines, or comments on the work, apply the requested edit and update the file without asking whether to remember it. Before finishing each call, check the conversation for feedback not yet captured. Store useful remarks and improvement thoughts from the author, not every conversational turn or the assistant's own speculative preferences.
+
+Classify each entry so future work uses it appropriately:
+
+- **Preference:** a reusable instruction or clearly general refinement, such as “Your LinkedIn openings are too vague; start with the practical takeaway.” Apply it to later matching work without requiring the word “always.”
+- **Post correction:** a specific change, such as “Remove this hashtag from this announcement.” Record the post/context and correction; use it when revisiting that post. Do not infer a permanent hashtag ban.
+- **Suggestion/experiment:** tentative advice, such as “Maybe try a question next time.” Retain it as tentative and consider it for matching future work; do not convert it into a mandatory rule or proven performance claim.
+
+If scope is unclear, capture the remark with its original context and narrowest supported scope. Do not interrupt work just to authorize storage. Ask only when ambiguity prevents the actual requested edit or a consequential future choice. Preserve actual factual corrections with their date and author provenance; memory is not independent verification of those facts.
+
+Example entry:
+
+```markdown
+### FB-001 — Concrete LinkedIn openings
+- Date: 2026-10-15
+- Kind: preference
 - Status: active
-- Scope: this publication / X announcements / all its X accounts
-- Instruction: Omit hashtags from X announcement copy.
-- Source: Author feedback, 2026-10-15: “Remember: no hashtags on X.”
+- Scope: this publication / LinkedIn announcements
+- Author feedback: “Your LinkedIn openings are too vague; start with the practical takeaway.”
+- Apply: Lead with the article's concrete practical takeaway before introducing the article.
+- Context: Review of the release-checklist announcement.
 - Replaces: none
 ```
 
-Use the actual date, shortest useful source quote or faithful paraphrase, and a scope supported by the request. Account-specific guidance stays account-specific; do not store credentials. Optional fields: rationale, a short before/after example, or experiment review point, only when helpful. Do not create empty files or log every conversational turn.
+Use the actual date and known publication identity, a short quote or faithful paraphrase, and the minimum context needed. Do not retain secrets or unnecessary private details. Keep the author feedback distinguishable from the assistant's distilled application guidance. Store feedback canonically here; if a correction also updates `facts.md`, `visual.md`, or `blog.md`, keep those files consistent and reference the feedback entry rather than creating competing rules.
 
-Merge equivalent instructions instead of accumulating duplicates. A clearly newer standing instruction supersedes the older conflicting rule within the same scope; mark the old entry superseded and link its replacement. A one-post override leaves the standing rule active for the next post. If two active instructions genuinely conflict and intent is unclear, ask one focused question rather than silently choosing a new permanent preference. On “forget/remove this preference,” remove it from active guidance and retained history in these workspace files; do not promise deletion from backups or prior chats.
+Merge duplicates while retaining meaningful context. A newer general correction supersedes an older conflicting preference in the same scope: mark the old entry superseded and link the replacement. A one-post override leaves the standing preference active for the next post. On a request to forget an entry, remove it and any corresponding retained preference in workspace files; do not promise deletion from prior chats or backups.
 
-After writing, re-read the changed entry and report the saved rule, scope, and file briefly. If persistence fails, say it was not saved and provide the entry for manual storage. Never claim memory based only on intent to write.
+Re-read after writes to verify persistence. Briefly mention file creation or meaningful saved changes in the normal update/handoff; do not ask for confirmation or recite the entire log on every call. If nothing new was said, leave the existing file unchanged after reading it.
 
-## Use it on the next post
+## Apply on subsequent calls and final review
 
-At stage 1, read active preferences for this publication. Before each requested artifact, select only applicable platform/account/type rules and include the relevant ones in the brief. Current explicit instructions take precedence over saved preferences; saved preferences override inferred habits and generic editorial defaults. Preferences cannot expand authorization, manufacture evidence, or override platform constraints.
+Current explicit instructions take precedence over saved feedback. Applicable active preferences override inferred habits and generic editorial defaults. Suggestions inform choices without becoming requirements. Post corrections apply only to their recorded context. Superseded entries are history, not active instructions. Feedback does not expand publication authorization, create evidence, or override platform constraints.
 
-At final review, check the applicable preferences again, including revisions to announcement copy. Do not expose internal preference notes in public copy. Recheck dated factual information when relevant; memory is not proof of current product availability or platform rules. Review experiments when the specified review point arrives and use actual supplied results, not invented analytics.
+Include applicable guidance in the brief when one is being created. At final review, check the requested artifacts against it, including revised announcements, and capture any new author remarks. Recheck time-sensitive factual information rather than assuming a saved correction is still current. Evaluate experiments only from actual supplied or retrieved results.
 
 ## Hosts without durable writable storage
 
-Use an existing user-designated persistent document only if tools and authorization support it. Otherwise apply feedback within the conversation and return a compact “Preferences for the next post” block with the same scope and instructions for the user to carry forward. Clearly say that a new session must receive that block. Do not claim cross-session learning, silently create a remote document, or write preferences to a different publication.
+If no filesystem is available, say that `gs/feedback.md` could not be created. Apply feedback in the conversation and provide a compact portable feedback block for the next session. An existing user-designated persistent document can be used when supported and authorized, but do not silently create a remote document or claim cross-session memory without verified durable storage.
