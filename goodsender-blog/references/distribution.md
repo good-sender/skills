@@ -1,6 +1,6 @@
 # Distribution through GoodSender
 
-Read only when preparing destination copy or publishing. These notes describe the tools verified for this package; live schemas, limits, and responses govern the current connection.
+Read at stage 11 after every draft save, when preparing destination copy, and when publishing. These notes describe the tools verified for this package; live schemas, limits, and responses govern the current connection.
 
 ## Inspect before changing
 
@@ -9,6 +9,20 @@ Read only when preparing destination copy or publishing. These notes describe th
 Offer only available connected accounts for immediate distribution. Explain how a user can connect a missing destination without claiming the current connection can deliver there. No post ID or missing tool means distribution cannot yet be inspected; never invent the connected account list.
 
 `set_post_distribution` is a partial update: omitted fields remain unchanged. Re-read before editing an existing post. Its returned changes describe the pending or applied plan; a confirmation-required response is not a successful save. Use the host's authorized confirmation flow and verify the final response.
+
+## The integrations question after saving
+
+Read `get_post_distribution` after every draft save, not only when distribution was requested. When no available integration is selected, the stage 12 review package asks once, as a question with answer options and several answers allowed, through the host's structured question tool (for example `AskUserQuestion`) when one exists and as a numbered list otherwise:
+
+**Question:** No integrations are enabled for this draft. Which should be enabled?
+
+- One option per available, connected external destination, named as the tool reports it (for example X, LinkedIn, Bluesky, Mastodon, Dev.to, Hashnode)
+- **Newsletter**, always listed, with the current recipient count when known
+- **None for now**
+
+List only destinations the tool reports as available and connected; mention a missing one in one line with how to connect it, never as an option. Ask it together with the image question from [images.md](images.md) when that one applies, each as its own question in the same message. Skip it when something is already selected, when the author named the destinations in the request, or when they asked for no questions or authorized publication without review; then say in one line what is selected.
+
+On the answer, prepare copy per the sections below, save with `set_post_distribution`, re-read, and report the selection. Enabling an integration prepares delivery; `publish_post` and `broadcast_post` still need their own authorization. An unanswered question leaves nothing selected and never holds the draft.
 
 ## Announcements
 
