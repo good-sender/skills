@@ -16,7 +16,7 @@ Otherwise draft an image plan at stage 9 but generate and upload nothing: the co
 2. **Upload my own:** attach files, give local paths or URLs, and say which slot each fills, or let the assistant place them.
 3. **Leave without images.**
 
-Ask it together with the integrations question from [distribution.md](distribution.md) when that one applies, each as its own question in the same message. Mixed answers are fine, such as an own cover with generated inline images. Do not ask when the user said not to ask questions or authorized publication without review; finish without images and say so in one line. An unanswered question leaves the draft without images; never hold the draft or an authorized publication on it. A durable answer ("always generate a cover", "I will supply my own") is feedback: record it per [improve-yourself.md](improve-yourself.md), keeping `visual.md` consistent if it exists.
+Ask it together with the integrations question from [distribution.md](distribution.md) and the design question from [design.md](design.md) when those apply, each as its own question in the same message. Mixed answers are fine, such as an own cover with generated inline images. Do not ask when the user said not to ask questions or authorized publication without review; finish without images and say so in one line. An unanswered question leaves the draft without images; never hold the draft or an authorized publication on it. A durable answer ("always generate a cover", "I will supply my own") is feedback: record it per [improve-yourself.md](improve-yourself.md), keeping `visual.md` consistent if it exists.
 
 ## Style
 

@@ -10,6 +10,7 @@
       "author_url": "https://example.test/about",
       "language": "American English",
       "voice": "Plain, specific, restrained; no invented personal anecdotes.",
+      "design": {"ActiveDesignID": "d-stock", "IsDefault": true},
       "tags": ["Invoicing", "Guides", "Writing"],
       "recent_posts": [
         {"id": "p1", "status": "published", "title": "Reading an invoice", "body": "Start with the amount and the due date. Those two fields tell the reader what is being requested and when."},
@@ -20,7 +21,8 @@
       "LinkedIn": {"Available": true, "Connected": true, "Account": "Mara Lin", "Selected": false, "Copy": ""},
       "Newsletter": {"Selected": false, "Recipients": 12, "Subject": "", "Summary": "", "Blocker": ""},
       "other_destinations": "Unavailable and unselected"
-    }
+    },
+    "design_mocks": "Mock blog_design_template_format as returning a short contract: five Liquid templates (SharedHeader, Landing, Post, Archive, Tag); every page renders {% render 'shared_head' %} in <head> and {% render 'attribution' %}; the post page outputs {{ post.html | raw }}; at least one page has {% subscribe %}<input type=\"email\" name=\"email\"><button type=\"submit\">Subscribe</button>{% endsubscribe %}; data: blog.title, blog.description, blog.logo, urls.archive, latestPosts[], post.title/html/publishedAt, tag.name, tags[]. Mock blog_design_create as returning NewCheckpoint {DesignID: d-new, CheckpointID: c-1, EditToken: t-1, CheckpointPreviewURL: https://example.test/design-preview/c-1} and Notices []. Mock blog_design_list as [{DesignID: d-stock, Title: Default, IsActive: true, IsDefault: true}]. Mock blog_design_save and blog_design_activate as succeeding; blog_design_activate returns a confirmation prompt first. Mock get_blog after activation as Design {ActiveDesignID: d-new, IsDefault: false}."
   },
   "scenarios": [
     {
@@ -68,6 +70,28 @@
       "earlier_draft": "For a small business, an invoice should make the next step clear. Read the amount, the due date, and the payment instructions together.",
       "blog_override": {"title": "Primeros pasos", "description": "Explicaciones sencillas para estudiantes que reciben su primera factura.", "domain": "https://example.test", "author": "Mara Lin", "language": "Spanish", "tags": ["Guías", "Facturas"], "recent_posts": [{"id": "s1", "status": "published", "title": "Antes de pagar", "body": "Si es tu primera factura, empieza por leerla con calma. Esta guía está pensada para estudiantes."}, {"id": "s2", "status": "published", "title": "Guarda el comprobante", "body": "Cuando termines, guarda el comprobante. Así tendrás a mano el registro de ese pago."}]},
       "evidence": "Author notes: The invoice's amount states what is requested; the due date states when it is due; payment instructions describe how to pay. No other product, payment, or student behavior claims are supplied."
+    },
+    {
+      "id": "default-design",
+      "request": "Use goodsender-blog for a quick sample: 200-250 words for small business owners on why an invoice needs a due date. Leave it as a draft. No images, nothing to announce. Then, when you ask, my answer to the design question is: generate a design, calm and warm, one green accent; I have no logo. Activate it only when I say so.",
+      "evidence": "Author notes: A due date tells the recipient when payment is expected and gives both sides one date to refer to. The author has no figures on late payment. No other claims are supplied.",
+      "expected": [
+        "The design question belongs to the review package after create_post, never to intake: it is shown there with its three options (generate; keep the standard design and do not ask again; not now) or, because the request pre-answers it, the given answer is applied at that point. No image question (declined) and no integrations question (declined).",
+        "On the generate answer, blog_design_template_format is read before blog_design_create; the create payload carries all five templates, BlogTitle 'Northwind Notes' and BlogDescription from the blog, Images all null, and the templates contain no invented tagline, bio, address, social link, or logo.",
+        "The reply shows https://example.test/design-preview/c-1 and the ?page=post, ?page=archive, ?page=tag variants and says the design is not active.",
+        "No blog_design_activate call: the author has not authorized activation. blog_design_save may be called. The stock design d-stock is never edited or deleted.",
+        "The draft p-new is saved before any design call and is not held by the design work."
+      ]
+    },
+    {
+      "id": "design-declined",
+      "request": "Use goodsender-blog for a quick sample: 150-200 words for small business owners on what a payment reference is. Draft only, no images, no announcements. When you ask about the design, my answer is: keep the standard design and don't ask again.",
+      "evidence": "Author notes: A payment reference is the text the payer enters with a transfer so the recipient can match it to the invoice. No other claims are supplied.",
+      "expected": [
+        "The design question is handled once, in the review package and never in intake: shown with its three options, or the pre-given answer applied there.",
+        "On the keep answer, gs/feedback.md gains a preference entry scoped to this publication / blog design recording the author's words, and blog.md's ## Design records the same; no blog_design_* tool is called.",
+        "The reply names the saved feedback in one line and does not propose a design again."
+      ]
     }
   ]
 }

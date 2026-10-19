@@ -20,7 +20,7 @@ Read `get_post_distribution` after every draft save, not only when distribution 
 - **Newsletter**, always listed, with the current recipient count when known
 - **None for now**
 
-List only destinations the tool reports as available and connected; mention a missing one in one line with how to connect it, never as an option. Ask it together with the image question from [images.md](images.md) when that one applies, each as its own question in the same message. Skip it when something is already selected, when the author named the destinations in the request, or when they asked for no questions or authorized publication without review; then say in one line what is selected.
+List only destinations the tool reports as available and connected; mention a missing one in one line with how to connect it, never as an option. Ask it together with the image question from [images.md](images.md) and the design question from [design.md](design.md) when those apply, each as its own question in the same message. Skip it when something is already selected, when the author named the destinations in the request, or when they asked for no questions or authorized publication without review; then say in one line what is selected.
 
 On the answer, prepare copy per the sections below, save with `set_post_distribution`, re-read, and report the selection. Enabling an integration prepares delivery; `publish_post` and `broadcast_post` still need their own authorization. An unanswered question leaves nothing selected and never holds the draft.
 
