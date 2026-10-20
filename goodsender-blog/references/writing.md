@@ -58,6 +58,22 @@ The body is Markdown, rendered with raw HTML disabled.
 
 Put comparisons in Markdown tables, evidence in linked citations or footnotes, and code in code blocks.
 
+### Quotations and attribution
+
+A blockquote is only for words quoted from someone else. Attribute it in its last paragraph, separated from the quote by a blank `>` line and kept to one line. On the hosted page the platform moves that line out of the quote into a caption:
+
+```markdown
+> The exact quoted words.
+>
+> -- Source: [Work title](https://example.com/work); Author: Jane Doe
+```
+
+renders as `<figure>` with `<figcaption>Source: <cite>Work title</cite>; Author: Jane Doe</figcaption>`. The `-- Source: ` prefix is exact (two hyphens, space, `Source:`, space). The work is one link or one plain title without brackets, parentheses, or angle brackets; `; Author: Name` is optional. Only this form produces `<cite>`, which names a work, so use it when the quote has a published source.
+
+For a quote from a person with no published work, such as an interview answer, end with `> — Jane Doe` (or `> -- Jane Doe`) as its own last paragraph; it becomes a caption without `<cite>`. Any other attribution, or one that shares a paragraph with the quote, stays plain text inside the quote. Newsletter email shows the attribution line as written.
+
+Example prompts, commands, and text the reader should type are not quotations. Put them in a fenced `text` code block, not a blockquote: an unattributed blockquote reads to search and AI engines as a quote with no source.
+
 ## Title, summary, description
 
 Three lines for three readers. Never write one sentence into two of them. They are bound by the same evidence rules as the body: a summary may not claim what the post could not.
@@ -85,6 +101,7 @@ Link only to URLs the author gave you, a tool returned, or a source you actually
 
 - [ ] The platform title is not repeated as a heading in the body
 - [ ] No raw HTML, HTML comments, inline SVG, or mermaid
+- [ ] Every blockquote is a real quotation with a `-- Source:` or `— Name` attribution paragraph; prompts and commands are in code blocks
 - [ ] No local image paths; only URLs returned by `upload_post_image`
 - [ ] No `[needs source]` markers
 - [ ] Every link goes to a real, known destination
