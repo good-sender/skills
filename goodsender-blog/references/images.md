@@ -1,12 +1,22 @@
 # Images
 
-Read at stage 9 when images are wanted. Plan them around the current text and post type. Placement should preserve unrelated prose; any needed caption or factual revision must be checked before saving.
+Read at stage 9 for a full draft or quick sample, and again when the author answers the image question. Plan images around the current text and post type. Placement should preserve unrelated prose; any needed caption or factual revision must be checked before saving.
 
-## Decide once
+## Decide once, after the draft
 
-For a full article, ask once (in the intake message) whether the user has a cover or inline images, wants them generated, or wants none. Honor a stated preference or an explicit request without asking again.
+Never ask about images in intake. The author decides better from the finished post.
 
-When the user wants no images, finish this stage without briefs, generation, uploads, substitute diagrams, or missing-asset warnings. For a narrow edit, preserve existing images unless the user asked to change them.
+An answer already given in the request settles the stage: apply it at stage 9 without asking. A durable preference in `visual.md` or `gs/feedback.md` counts as an answer too; say in one line that it was applied, so the author can override it. When the author wants no images, finish this stage without briefs, generation, uploads, substitute diagrams, or missing-asset warnings. For a narrow edit, preserve existing images unless the user asked to change them.
+
+Otherwise draft an image plan at stage 9 but generate and upload nothing: the cover and only the inline slots that pass the usefulness bar, each with its anchor and a one-line description. Save the draft without images. Whenever the saved draft has no images, the stage 12 review package shows the plan and asks once, as a question with answer options, through the host's structured question tool (for example `AskUserQuestion`) when one exists and as a numbered list otherwise:
+
+**Question:** The draft is saved without images. What should happen with them?
+
+1. **Generate:** all planned images, or the listed ones.
+2. **Upload my own:** attach files, give local paths or URLs, and say which slot each fills, or let the assistant place them.
+3. **Leave without images.**
+
+Ask it together with the integrations question from [distribution.md](distribution.md) and the design question from [design.md](design.md) when those apply, each as its own question in the same message. Mixed answers are fine, such as an own cover with generated inline images. Do not ask when the user said not to ask questions or authorized publication without review; finish without images and say so in one line. An unanswered question leaves the draft without images; never hold the draft or an authorized publication on it. A durable answer ("always generate a cover", "I will supply my own") is feedback: record it per [improve-yourself.md](improve-yourself.md), keeping `visual.md` consistent if it exists.
 
 ## Style
 
@@ -42,6 +52,21 @@ The cover is the one exception. It may be conceptual, built around the article's
 - Long or critical text inside a generated image; generators render text imperfectly
 
 Use supplied assets when they fit. A real screenshot comes from the author, not from a generator.
+
+## Supplied media
+
+- Accept files attached in the conversation, local paths, or URLs the author gives. A URL is a source to fetch bytes from, never an embedded link; if the bytes cannot be read, report that asset missing.
+- Look at each one before using it: it fits its slot, is legible at its displayed size, and shows no private data or secrets the author may not intend to publish. Flag a doubtful one instead of silently dropping or using it.
+- Write alt text from what the image actually shows. A caption stating what it depicts rests on the author's word; record it in the ledger.
+- A planned slot the author's media leaves empty stays empty unless they also asked to generate it. Never fill a screenshot slot with a generated image.
+
+## After the answer
+
+1. Produce or accept the chosen assets: supplied media per the section above, generated images per Style, Plan, and Validation.
+2. Place, upload, and set the cover as below.
+3. Update the saved draft with `edit_post`, or the staged revision for a live post, following [editing.md](editing.md); preserve everything else.
+4. Rerun the body lint and check new captions and alt text. If a cover changes newsletter rendering, re-verify per [distribution.md](distribution.md).
+5. Re-mint the preview and reply briefly: preview link, images added, any missing assets and their briefs.
 
 ## Validation
 

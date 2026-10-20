@@ -3,7 +3,7 @@ name: goodsender-blog
 description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and automatically retaining author feedback for future posts.
 license: Apache-2.0
 metadata:
-  version: "2.1.1"
+  version: "2.4.0"
 ---
 
 # GoodSender blog
@@ -45,16 +45,16 @@ A request for fiction or satire authorizes invention within that work. A fiction
 | 6 | Fact-check | Ledger produced by a separate pass | evidence.md |
 | 7 | Revise and resolve | Zero `[needs source]` markers | evidence.md |
 | 8 | Metadata and lint | New claims checked; lint passes | writing.md |
-| 9 | Images | Requested images reviewed or missing; declined images skipped | [images.md](references/images.md) |
+| 9 | Images | Already-decided images reviewed or reported missing, declined images skipped; otherwise plan drafted, nothing generated | [images.md](references/images.md) |
 | 10 | Connect and save | Profile reconciled; draft saved or live revision staged | [setup.md](references/setup.md), [editing.md](references/editing.md) for existing posts |
-| 11 | Distribution, if requested | Copy checked; saved selection verified | [distribution.md](references/distribution.md) |
-| 12 | Package check, review, and publish | Complete package checked; actual action authorized | evidence.md, distribution.md |
+| 11 | Distribution | Current selection read after the save; requested copy checked and saved selection verified | [distribution.md](references/distribution.md) |
+| 12 | Package check, review, and publish | Complete package checked; post-save questions asked when the saved draft has no images, no selected integrations, or the blog still uses the standard design; actual action authorized | evidence.md, distribution.md, images.md, [design.md](references/design.md) |
 
-Read a reference when you reach its stage, not before. Keep editorial questions to one intake message and at most one consolidated claims question, followed by a review package. Connection setup, unresolved destination choices, and host/tool confirmations can require additional interaction. Reuse answers and existing authorization, and give progress updates appropriate to the host.
+Read a reference when you reach its stage, not before. Keep editorial questions to one intake message and at most one consolidated claims question, followed by a review package. The three post-save questions, images, integrations, and the blog design, belong in the review package, never in intake, and are asked as a question with answer options. Connection setup, unresolved destination choices, and host/tool confirmations can require additional interaction. Reuse answers and existing authorization, and give progress updates appropriate to the host.
 
 ### 1. Read the blog
 
-If GoodSender tools are connected, call `get_blog` and `list_posts`, then `get_post` on the two or three most recent published posts. Tool names may carry a client prefix; current tool descriptions and schemas govern. Learn the byline, taxonomy, language, voice, structure, image habits, and what is already covered. A workspace folder, if present, overrides what you infer.
+If GoodSender tools are connected, call `get_blog` and `list_posts`, then `get_post` on the two or three most recent published posts. Tool names may carry a client prefix; current tool descriptions and schemas govern. Learn the byline, taxonomy, language, voice, structure, image habits, and what is already covered. Note `Design.IsDefault` from `get_blog`: true means the blog still renders the standard GoodSender design, which raises the design question at stage 12 (see [design.md](references/design.md)); false, or a design already settled in `blog.md` or `gs/feedback.md`, means there is nothing to ask. A workspace folder, if present, overrides what you infer.
 
 With several connections, use the one matching the requested publication. Never write to another publication or look for credentials.
 
@@ -77,7 +77,7 @@ Keep **scope** separate from **delivery intent**: a full draft, a quick sample, 
 
 Establish the byline from the workspace folder, the blog, or the user. Ask about the author's role or experience only when it matters to the post's perspective or claims; never invent credentials or require them for every format.
 
-Reuse what the user already said. Send **one** intake message only for material gaps: goal, necessary author-only facts, type if ambiguous, and image preference if unknown. If the angle is open, offer two or three options with a one-line trade-off and your recommendation. Include known distribution preferences in the brief without inventing connected accounts or expanding a draft request into a campaign.
+Reuse what the user already said. Send **one** intake message only for material gaps: goal, necessary author-only facts, and type if ambiguous. Do not ask about images here: note any image preference the user already stated, and leave an unknown preference for the review package (stages 9 and 12). If the angle is open, offer two or three options with a one-line trade-off and your recommendation. Include known distribution preferences in the brief without inventing connected accounts or expanding a draft request into a campaign. Do not ask about integrations or the blog design here either; those questions wait for the review package (stages 11 and 12).
 
 If the user told you not to ask, do not ask. State the goal and angle you are assuming in one line and proceed with the evidence you have.
 
@@ -103,7 +103,7 @@ Follow [writing.md](references/writing.md). Preserve a supplied title; otherwise
 
 ### 9. Images
 
-Follow [images.md](references/images.md) when images are wanted. Honor no-images requests by skipping asset planning. Plan the requested cover and/or inline images around the post type. Look at every generated image before using it. If a requested image cannot be produced, give a visual brief and report it missing; never claim an image exists.
+Follow [images.md](references/images.md). When the request, `visual.md`, or `gs/feedback.md` already settles the images, apply that now: honor a no-images answer by skipping asset planning; otherwise plan the requested cover and/or inline images around the post type and produce or accept them. When nothing settles it, draft an image plan against the finished text but generate and upload nothing; the draft is saved without images and the image question goes into the review package. Look at every generated or supplied image before using it. If a requested image cannot be produced, give a visual brief and report it missing; never claim an image exists.
 
 ### 10. Connect and save
 
@@ -113,7 +113,9 @@ Upload requested images with `upload_post_image` and use its returned URLs. Chec
 
 ### 11. Distribution
 
-For requested distribution preparation or a publishing request, read `get_post_distribution` and follow [distribution.md](references/distribution.md): separate announcement copy per selected destination, the same article for republish destinations, a dedicated newsletter subject and summary. This applies when distribution is requested alongside a draft. For a draft without distribution preparation, skip this stage. A connected account is an option, not consent. If preferences are missing for requested preparation or publication, ask which available destinations to use, make newsletter inclusion explicit, and distinguish preparation from sending.
+After the draft is saved, read `get_post_distribution` for every full draft and quick sample, not only when distribution was requested. It reports which destinations are available on the connected account and which are selected; never invent that list. If no available integration is selected, external destinations and the newsletter alike, the integrations question goes into the review package per [distribution.md](references/distribution.md): one question whose options are every available integration plus the newsletter. If something is already selected, or the author named the destinations in the request, there is nothing to ask.
+
+For requested distribution preparation, a publishing request, or the author's answer to the integrations question, follow distribution.md: separate announcement copy per selected destination, the same article for republish destinations, a dedicated newsletter subject and summary. A connected account is an option, not consent. Make newsletter inclusion explicit, and distinguish preparation from sending.
 
 Check all new distribution claims against the evidence before saving with `set_post_distribution`, which prepares delivery without sending. Preserve settings outside the requested change, and explicitly deselect destinations when that is needed to match a blog-only authorization. Re-read to verify selected accounts, saved copy, budgets, newsletter recipient count, and blockers. Keep copy for an unapproved live revision staged with that revision. Surface a missing capability instead of substituting a fallback blurb.
 
@@ -121,7 +123,9 @@ Check all new distribution claims against the evidence before saving with `set_p
 
 Now that all requested artifacts exist, run the final package check in [evidence.md](references/evidence.md). Cover the current body, title, summary, description, captions, alt text, announcement copy, and newsletter text together. Apply the relevant post-type checks. Reconcile the ledger with the final wording, fix any drift, and verify corrected saved fields and distribution. Re-mint the preview after changes to the saved post. Any later review edit or chosen title must pass the same checks on the changed claims before it is saved or sent.
 
-Hand over one review package: preview link or staged revision, title and alternatives if proposed, a short claim ledger, requested images or missing assets, requested announcement and newsletter copy, and selected account names. Keep it short; do not paste the body back when the preview shows it. The blog preview is not a newsletter preview; for a requested email test, get the user's own inbox and use `send_post_test` with the exact subject and summary. Do not guess an address, and never send a test to the subscriber list.
+Hand over one review package: preview link or staged revision, title and alternatives if proposed, a short claim ledger, requested images or missing assets, requested announcement and newsletter copy, selected account names, and the post-save questions that apply: the image question with its plan when the saved draft has no images, the integrations question when no available integration is selected, and the design question when `get_blog` reports the standard design. Ask each as a question with answer options, through the host's structured question tool (for example `AskUserQuestion`) when one exists and as a numbered list otherwise; the integrations question allows several answers. Keep it short; do not paste the body back when the preview shows it. The blog preview is not a newsletter preview; for a requested email test, get the user's own inbox and use `send_post_test` with the exact subject and summary. Do not guess an address, and never send a test to the subscriber list.
+
+When the author answers the image question, follow "After the answer" in [images.md](references/images.md): produce or accept the assets, update the saved draft or staged revision, recheck captions and alt text, and re-mint the preview. When the author answers the integrations question, run stage 11 for the chosen destinations: prepare copy, save with `set_post_distribution`, re-read, and report the selection. Enabling an integration prepares delivery only; publishing and sending still need their own authorization. When the author answers the design question with "generate", follow [design.md](references/design.md): read the template format, create the design, show its preview links, refine on their remarks, and save; activate only with their explicit word, because it changes the public site at once. "Keep the standard design" is recorded as feedback so it is not asked again. An unanswered question never holds the draft or a publication authorized without images, integrations, or a new design.
 
 For draft-only work, stop here. To publish, the user approves the actual destinations. "Publish now, skip the review" is honored within the scope they authorized: it does not add channels or email subscribers, and it does not waive rule 1. If claims are still unresolved at that point, hedge or cut them with `edit_post`, say what you removed, then publish.
 
@@ -135,9 +139,10 @@ This is the automatic feedback loop described above, not a command the author ne
 
 ## Fast paths
 
-- **Quick sample:** no interview and no unsolicited distribution questions. Write a short post from the available material, check it and its metadata, save a draft, and return the preview. Honor any distribution preparation explicitly requested with the sample.
+- **Quick sample:** no interview and no questions beyond the post-save ones. Write a short post from the available material, check it and its metadata, save a draft, and return the preview with the post-save questions that apply. Honor any distribution preparation explicitly requested with the sample.
 - **Full draft for review:** keep the requested depth and relevant stages, including distribution preparation if requested. Stop before publication and sending.
-- **Narrow edit:** read [editing.md](references/editing.md), change what was asked, preserve everything else including distribution, and check changed claims and any dependent text in scope. Flag stale related copy outside scope instead of rewriting it silently. A review-only request does not authorize a live edit.
+- **Narrow edit:** read [editing.md](references/editing.md), change what was asked, preserve everything else including distribution, and check changed claims and any dependent text in scope. Flag stale related copy outside scope instead of rewriting it silently. A review-only request does not authorize a live edit. No design question.
+- **Blog design only:** when the author asks for a new design without a post, read [design.md](references/design.md) and run its steps; no post is drafted and no post-save questions apply.
 
 No fast path skips the two rules or the zero-marker gate.
 
@@ -163,6 +168,15 @@ Each of these was observed when agents wrote posts without this skill.
 | "The user is in a hurry, so I will skip the check" | Hurry changes how much you ask, never what you assert. |
 | Repeating an unanswered question and holding the draft | Hedge or cut, then carry on. |
 | Reading "skip the review" as permission to select LinkedIn or the newsletter | Skipping review adds no destinations. |
+| Asking about images in intake, or generating them before the author answers | The author decides from the actual post; the question waits for the review package. |
+| Handing over a draft without images, or with no integration selected, and not asking | Both post-save questions are part of the review package, with answer options, whenever their condition holds. |
+| Offering a destination `get_post_distribution` did not report as available | Only connected, available integrations and the newsletter are options; never invent the account list. |
+| Reading an enabled integration as permission to publish or email | Enabling prepares delivery. `publish_post` and `broadcast_post` still need their own authorization. |
+| Asking about the blog design in intake, or creating one before the author answers | The author decides from the saved post and the live blog; the question waits for the review package. |
+| Calling `blog_design_activate` on the author's "looks good" about a preview | Activation changes the public site at once. It needs its own explicit authorization, like publishing. |
+| Editing or deleting the stock design, or guessing `IsDefault` from a title | The stock design is the way back; `get_blog` reports the state, and a title can be renamed. |
+| A generated logo, tagline, or social link in a design | A brand is the author's. Templates carry only what `get_blog` and the author supplied. |
+| Asking the design question again after "keep the standard design" | That answer is feedback. Record it and stop asking. |
 
 ## Workspace folder
 
@@ -175,7 +189,8 @@ On a host with a filesystem, keep the skill's files in a `goodsender-blog/` fold
 | Stage 2 | `goodsender-blog/<date>-<slug>/brief.md` |
 | Stage 3 | `goodsender-blog/<date>-<slug>/sources.md` |
 | Stage 7, refreshed at stages 8–12 | `goodsender-blog/<date>-<slug>/ledger.md` |
-| Stage 9 | `goodsender-blog/<date>-<slug>/images/` |
+| Stage 9, or after the image answer | `goodsender-blog/<date>-<slug>/images/` |
+| After the design answer | `goodsender-blog/design/<design-title>/`, and a `## Design` line in `blog.md` |
 | Stage 10 | `<date>-<slug>.md`, the body exactly as saved; a pending live revision stays in its working folder as `revision.md` |
 
 Hosts without durable storage retain feedback only in the conversation and provide a portable preference block; never promise cross-session memory without a verified saved artifact. See improve-yourself.md.

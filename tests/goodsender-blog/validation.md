@@ -39,3 +39,18 @@ These are behavioral text simulations, not live GoodSender integration tests or 
 ## Follow-up: session version notice
 
 The once-per-session update notice was added after the eight simulations. Its release source and asset naming were checked against the live public release metadata and the repository's packaging workflow: skill versions come from `goodsender-blog-MAJOR.MINOR.PATCH.zip`, while the release tag contains a date and commit. The loaded 2.0.0 skill is newer than the published 0.1.0 asset at this check, so no update notice is appropriate. Structural validation and reference-link checks were repeated. Session deduplication and notification behavior are prose instructions, not an independently executed runtime test.
+
+## goodsender-blog 2.4.0 validation: the blog design question
+
+Run date: 2026-10-19. Two new scenarios, `default-design` and `design-declined`, were added to [scenarios.json](scenarios.json) with a `design` field on the common blog fixture and a `design_mocks` entry describing the mocked `blog_design_*` responses. Each ran as an isolated text simulation in its own temporary directory, by a separate worker that produced the artifacts before reading the scenario's `expected` list, with every GoodSender call mocked on paper.
+
+| Scenario | Result | Artifact evidence |
+| --- | --- | --- |
+| `default-design` | Pass | The design question appeared only in the review package after `create_post`, with its three options, next to no image or integrations question. `blog_design_template_format` preceded `blog_design_create`; the payload carried five templates, the blog's own title and description, null images, and no invented tagline, bio, address, social link, or logo. The reply showed the preview link and its `?page=post`, `?page=archive`, and `?page=tag` variants and said the design was not active. `blog_design_save` was called; `blog_design_activate` was not, and the stock design `d-stock` was never written. The draft `p-new` was saved before any design call. |
+| `design-declined` | Pass | The question was handled once, in the review package. The keep answer became a `gs/feedback.md` preference entry scoped to this publication's blog design and a `## Design` line in `blog.md`; no `blog_design_*` tool was called, and the reply named the saved feedback in one line. |
+
+Both workers also flagged ambiguities, which were resolved in `references/design.md` before this record was written: an answer given in the request is applied without asking (as images.md already said); "not now" is dated under `## Design` in `blog.md`; `SharedHeader` is the `shared_head` partial rendered inside `<head>`, where the CSS lives; `blog_design_save` runs once the author is done refining, or at once when they gave no remarks; and a saved, unactivated design counts as settled, so later runs offer activation instead of asking again. One pre-existing ambiguity both workers hit was settled by the author afterwards and written into distribution.md: a blanket "no announcements" in the request declines the newsletter too, so the integrations question is not asked.
+
+Structural checks: `skills-ref validate ./goodsender-blog` passed; all 36 relative Markdown links resolved; `SKILL.md` is 196 lines; `metadata.version` parsed as `2.4.0`; `git diff --check` passed.
+
+Limits: as above, these are behavioral text simulations with mocked tool schemas, not live design generation. No Liquid template was rendered by the GoodSender server, so the templates' validity against the live `blog_design_template_format` contract was not exercised; the activation confirmation flow was not exercised either.

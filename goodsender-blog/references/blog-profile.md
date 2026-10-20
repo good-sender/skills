@@ -6,7 +6,7 @@ Read at stage 1. The profile is what you know about the publication before writi
 
 | Call | What it settles |
 | --- | --- |
-| `get_blog` | Title, description, domain, theme: what the publication says it is |
+| `get_blog` | Title, description, domain, and the design state: `Design.IsDefault` true means the standard GoodSender design is still live |
 | `list_posts` | Byline and author URL, tags and categories in use, status, topics already covered |
 | `get_post` on the two or three most recent published posts | Voice and structure from the actual Markdown; cover and inline images where the response includes them |
 
@@ -26,6 +26,7 @@ Read; do not narrate. The user needs two lines at most ("Your blog reads as … 
 | Image habits: cover or none, style, inline images or none | Cover URLs the tools return, images in bodies, `visual.md` |
 | Topics already covered | `list_posts` |
 | What is true and what may not be claimed | `facts.md` |
+| Design: standard or the blog's own, and whether the author declined a new one | `get_blog` `Design.IsDefault`, `blog.md` `## Design`, `gs/feedback.md` |
 | Active human refinements, scoped to publication/platform/account | `gs/feedback.md` in the invocation directory; read on every call |
 
 Describe what you observe, not what is typical of blogs. Keep two real opening lines as anchors for the voice. Do not promote a habit seen in one post into a rule.
@@ -77,6 +78,7 @@ Rules:
 ## Audience
 ## Voice
 ## Structure
+## Design
 ## Standing instructions
 ```
 

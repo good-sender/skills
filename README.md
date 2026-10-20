@@ -78,6 +78,10 @@ Version 2.1.0 adds dedicated X and LinkedIn announcement guides with platform li
 
 Version 2.1.1 writes quotations in the form the blog renders as a captioned figure: a `-- Source: [Work](url); Author: Name` line produces a `<cite>` for the quoted work, and a `— Name` line credits a person. Example prompts and commands go in code blocks rather than blockquotes.
 
+Version 2.3.0 asks about images after the draft instead of in intake. When your image preference is unknown, the draft is saved without images and the review package proposes a concrete image plan: supply your own media, generate the planned images, or skip them. A stated preference is applied without asking, and an unanswered question never holds the draft.
+
+Version 2.4.0 notices when your blog still uses the standard GoodSender design and, after the draft is saved, asks whether to create one of its own: generated from your blog's title, description, posts, and any direction you give, shown as preview links, refined on your remarks, and activated only on your explicit word. "Keep the standard design" is remembered so you are not asked again.
+
 Once per session, the skill makes a best-effort check for a newer published version. If one is available, it adds a brief download notice to a normal update or handoff and continues the task. Unavailable checks stay silent, and updates are not installed automatically.
 
 The skill reads your blog for byline, voice, and taxonomy, and uses your material and checked sources as evidence. It checks factual claims in a separate pass, checks new metadata and distribution copy as they are written, then reviews the complete package. It generates and reviews images only when wanted and tools are available. You receive a preview and short ledger explaining what was verified, supplied by you, or changed. Setup, destination choices, and required tool confirmations may need additional interaction beyond the editorial intake and review.
