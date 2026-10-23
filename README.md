@@ -86,7 +86,7 @@ Once per session, the skill makes a best-effort check for a newer published vers
 
 The skill reads your blog for byline, voice, and taxonomy, and uses your material and checked sources as evidence. It checks factual claims in a separate pass, checks new metadata and distribution copy as they are written, then reviews the complete package. It generates and reviews images only when wanted and tools are available. You receive a preview and short ledger explaining what was verified, supplied by you, or changed. Setup, destination choices, and required tool confirmations may need additional interaction beyond the editorial intake and review.
 
-Publishing happens only to authorized destinations. dev.to and Hashnode receive the original article; announcements and newsletter text are adapted separately. Requested distribution can be prepared with a draft without sending it. Review-only revisions of published posts are staged separately; a directly requested live correction can be applied within that scope.
+Publishing happens only to authorized destinations. dev.to receives the original article; announcements and newsletter text are adapted separately. Requested distribution can be prepared with a draft without sending it. Review-only revisions of published posts are staged separately; a directly requested live correction can be applied within that scope.
 
 In a coding agent, the skill keeps its notes (blog voice, facts, visual style, per-post sources) in a `goodsender-blog/` folder in the directory you run it from, with finished posts beside it. A separate folder per blog works best.
 
