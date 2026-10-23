@@ -3,7 +3,7 @@ name: goodsender-blog
 description: Write, revise, illustrate, or publish blog posts on GoodSender and prepare requested social announcements or newsletters. Adapt to the post type, from explainers and tutorials to essays, interviews, reviews, and fiction. Use for full drafts, quick samples, edits to existing posts, and automatically retaining author feedback for future posts.
 license: Apache-2.0
 metadata:
-  version: "2.4.0"
+  version: "2.4.1"
 ---
 
 # GoodSender blog
