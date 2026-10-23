@@ -16,7 +16,7 @@ Read `get_post_distribution` after every draft save, not only when distribution 
 
 **Question:** No integrations are enabled for this draft. Which should be enabled?
 
-- One option per available, connected external destination, named as the tool reports it (for example X, LinkedIn, Bluesky, Mastodon, Dev.to, Hashnode)
+- One option per available, connected external destination, named as the tool reports it (for example X, LinkedIn, Bluesky, Mastodon, Dev.to). Hashnode is retired: the tool reports it as never available, so it is not offered.
 - **Newsletter**, always listed, with the current recipient count when known
 - **None for now**
 
@@ -38,7 +38,7 @@ Check `Budget.Used`, `Budget.Max`, and `Budget.Over`, including the appended lin
 
 ## Republication
 
-`Devto` and `Hashnode` select full-article republication. Keep the same article, title, and canonical original. This workflow does not require alternate article versions. A later publish may update existing republished copies, so an edit to an already-published post may affect them.
+`Devto` selects full-article republication. Keep the same article, title, and canonical original. This workflow does not require alternate article versions. A later publish may update existing republished copies, so an edit to an already-published post may affect them.
 
 ## Newsletter
 
